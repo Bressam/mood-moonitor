@@ -11,7 +11,10 @@ struct Module {
             sources: "Sources/**",
             resources: "Resources/**",
             infoPlist: .extendingDefault(with: [
-                "UILaunchScreen" : ""
+                "UILaunchScreen" : [
+                    "UIColorName": "launchscreen-background",
+                    "UIImageName": "launchscreen-logo"
+                ]
             ]),
             bundleId: bundleId
         )
