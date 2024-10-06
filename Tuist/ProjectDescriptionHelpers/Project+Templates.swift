@@ -44,6 +44,7 @@ extension Project {
                 infoPlist: module.mainTarget.infoPlist,
                 sources: module.mainTarget.sources,
                 resources: module.mainTarget.resources,
+                scripts: [.swiftLint],
                 dependencies: dependencies
             )
         )
