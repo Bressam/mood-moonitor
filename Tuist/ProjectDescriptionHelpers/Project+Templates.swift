@@ -21,7 +21,7 @@ extension Project {
         // MARK: - Schemes definition
         let mainScheme: Scheme = .scheme(
             name: module.mainTarget.name,
-            shared: true,
+            shared: false,
             buildAction: .buildAction(
                 targets: [.target(module.mainTarget.name)]
             ),

@@ -9,8 +9,8 @@ let package = Package(
         .iOS(.v17)
     ],
     products: [
-        .executable(name: "MoodMonitor",
-                    targets: ["MoodMonitor"])
+        .executable(name: "MoodMoonitor",
+                    targets: ["MoodMoonitor"])
     ],
     dependencies: [],
     targets: [

@@ -1,31 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "mood-moonitor-appicon.png",
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "mood-moonitor-appicon 1.png",
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "tinted"
-        }
-      ],
-      "filename" : "mood-moonitor-appicon 2.png",
+      "filename" : "mood-moonitor-appicon- 1024.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
