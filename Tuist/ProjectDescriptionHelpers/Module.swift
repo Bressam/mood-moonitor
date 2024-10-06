@@ -14,7 +14,8 @@ struct Module {
                 "UILaunchScreen" : [
                     "UIColorName": "launchscreen-background",
                     "UIImageName": "launchscreen-logo"
-                ]
+                ],
+                "UILaunchStoryboardName" : "Launch Screen.storyboard"
             ]),
             bundleId: bundleId
         )
