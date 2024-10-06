@@ -6,7 +6,7 @@ import ProjectDescription
 
 extension Project {
     public static func project(
-        with name: String,
+        name: String,
         organizationName: String = "dev.bressam",
         bundleId: String,
         deploymentTarget: DeploymentTargets = .iOS("17.0"),
