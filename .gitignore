@@ -75,6 +75,7 @@ Tuist/Dependencies/graph.json
 Tuist/Dependencies/Carthage
 Tuist/Dependencies/SwiftPackageManager 
 graph.dot
+.tuist-bin
 
 
 Derived/
