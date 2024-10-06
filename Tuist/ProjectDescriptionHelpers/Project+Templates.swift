@@ -63,6 +63,11 @@ extension Project {
                 disableSynthesizedResourceAccessors: disableSynthesizedResourceAccessors
             ),
             packages: packages,
+            settings: .settings(
+                base: [
+                "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES",
+                "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
+                ]),
             targets: projectTargets,
             schemes: [mainScheme],
             resourceSynthesizers: [.assets()]
