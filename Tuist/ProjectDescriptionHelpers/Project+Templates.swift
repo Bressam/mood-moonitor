@@ -65,7 +65,7 @@ extension Project {
             packages: packages,
             targets: projectTargets,
             schemes: [mainScheme],
-            resourceSynthesizers: []
+            resourceSynthesizers: [.assets()]
         )
     }
 }
