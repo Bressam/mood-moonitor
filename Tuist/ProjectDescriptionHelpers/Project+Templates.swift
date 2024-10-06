@@ -6,7 +6,8 @@ import ProjectDescription
 
 extension Project {
     public static func project(
-        with name: String,
+        name: String,
+        appName: String,
         organizationName: String = "dev.bressam",
         bundleId: String,
         deploymentTarget: DeploymentTargets = .iOS("17.0"),
@@ -21,7 +22,7 @@ extension Project {
         // MARK: - Schemes definition
         let mainScheme: Scheme = .scheme(
             name: module.mainTarget.name,
-            shared: true,
+            shared: false,
             buildAction: .buildAction(
                 targets: [.target(module.mainTarget.name)]
             ),
@@ -36,9 +37,10 @@ extension Project {
         // MARK: - Main Target
         projectTargets.append(
             .target(
-                name: module.mainTarget.name,
+                name: name,
                 destinations: .iOS,
                 product: .app,
+                productName: appName,
                 bundleId: module.mainTarget.bundleId,
                 deploymentTargets: deploymentTarget,
                 infoPlist: module.mainTarget.infoPlist,
@@ -63,9 +65,14 @@ extension Project {
                 disableSynthesizedResourceAccessors: disableSynthesizedResourceAccessors
             ),
             packages: packages,
+            settings: .settings(
+                base: [
+                "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES",
+                "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
+                ]),
             targets: projectTargets,
             schemes: [mainScheme],
-            resourceSynthesizers: []
+            resourceSynthesizers: [.assets()]
         )
     }
 }
