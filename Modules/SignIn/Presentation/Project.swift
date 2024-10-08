@@ -10,6 +10,9 @@ let project = Project.module(
     interfaceDependencies: [
         .project(target: "SignInDomainInterface", path: "../Domain")
     ],
+    testDependencies: [
+        .project(target: "SignInTesting", path: "../Testing")
+    ],
     disableBundleAccessors: true,
     disableSynthesizedResourceAccessors: false
 )

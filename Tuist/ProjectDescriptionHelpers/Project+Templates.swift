@@ -81,11 +81,13 @@ extension Project {
     public static func module(
         name: String,
         hasInterface: Bool = true,
+        hasTests: Bool = true,
         organizationName: String = "dev.bressam",
         bundleIdPrefix: String,
         deploymentTarget: DeploymentTargets = .iOS("17.0"),
         implementationDependencies: [ProjectDescription.TargetDependency] = [],
         interfaceDependencies: [ProjectDescription.TargetDependency] = [],
+        testDependencies: [ProjectDescription.TargetDependency] = [],
         packages: [ProjectDescription.Package] = [],
         disableBundleAccessors: Bool = true,
         disableSynthesizedResourceAccessors: Bool = false
@@ -100,10 +102,7 @@ extension Project {
             shared: false,
             buildAction: .buildAction(
                 targets: [.target(module.mainTarget.name)]
-            ),
-            testAction: .testPlans([
-                .relativeToManifest(testPlanFile)
-            ])
+            )
         )
         
         // MARK: Targets definition
@@ -147,6 +146,28 @@ extension Project {
             )
         )
         
+        // MARK: Test Target
+        if hasTests {
+            moduleTargets.append(
+                .target(
+                    name: module.testTarget.name,
+                    destinations: .iOS,
+                    product: .unitTests,
+                    productName: module.testTarget.name,
+                    bundleId: module.testTarget.bundleId,
+                    deploymentTargets: deploymentTarget,
+                    infoPlist: module.testTarget.infoPlist,
+                    sources: module.testTarget.sources,
+                    resources: module.testTarget.resources,
+                    scripts: [.swiftLint],
+                    dependencies: testDependencies + [
+                        .target(name: module.mainTarget.name),
+                        .target(name: module.interfaceTarget.name)
+                    ]
+                )
+            )
+        }
+
         return Project(
             name: name,
             organizationName: organizationName,
