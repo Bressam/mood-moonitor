@@ -80,10 +80,12 @@ extension Project {
 // MARK: - Module
     public static func module(
         name: String,
+        hasInterface: Bool = true,
         organizationName: String = "dev.bressam",
         bundleIdPrefix: String,
         deploymentTarget: DeploymentTargets = .iOS("17.0"),
-        dependencies: [ProjectDescription.TargetDependency] = [],
+        implementationDependencies: [ProjectDescription.TargetDependency] = [],
+        interfaceDependencies: [ProjectDescription.TargetDependency] = [],
         packages: [ProjectDescription.Package] = [],
         disableBundleAccessors: Bool = true,
         disableSynthesizedResourceAccessors: Bool = false
@@ -108,21 +110,23 @@ extension Project {
         var moduleTargets = [Target]()
         
         // MARK: Interface
-        moduleTargets.append(
-            .target(
-                name: module.interfaceTarget.name,
-                destinations: .iOS,
-                product: .framework,
-                productName: module.interfaceTarget.name,
-                bundleId: module.interfaceTarget.bundleId,
-                deploymentTargets: deploymentTarget,
-                infoPlist: module.interfaceTarget.infoPlist,
-                sources: module.interfaceTarget.sources,
-                resources: module.interfaceTarget.resources,
-                scripts: [.swiftLint],
-                dependencies: dependencies
+        if hasInterface {
+            moduleTargets.append(
+                .target(
+                    name: module.interfaceTarget.name,
+                    destinations: .iOS,
+                    product: .framework,
+                    productName: module.interfaceTarget.name,
+                    bundleId: module.interfaceTarget.bundleId,
+                    deploymentTargets: deploymentTarget,
+                    infoPlist: module.interfaceTarget.infoPlist,
+                    sources: module.interfaceTarget.sources,
+                    resources: module.interfaceTarget.resources,
+                    scripts: [.swiftLint],
+                    dependencies: interfaceDependencies
+                )
             )
-        )
+        }
         
         // MARK: Main Target
         moduleTargets.append(
@@ -137,7 +141,7 @@ extension Project {
                 sources: module.mainTarget.sources,
                 resources: module.mainTarget.resources,
                 scripts: [.swiftLint],
-                dependencies: dependencies + [
+                dependencies: implementationDependencies + [
                     .target(name: module.interfaceTarget.name)
                 ]
             )

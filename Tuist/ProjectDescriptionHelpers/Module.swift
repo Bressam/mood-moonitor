@@ -11,9 +11,6 @@ struct Module {
     private let interfacePrefix = "Interface"
     private let interfaceSufix = "Interface"
 
-    private let testingPrefix = "Testing"
-    private let testingSufix = "Testing"
-
     var mainTarget: Target {
         Target(
             name: name,
@@ -29,16 +26,6 @@ struct Module {
             name: "\(name)\(interfaceSufix)",
             sources: interfacePrefix + "/Sources/**",
             resources: interfacePrefix + "/Resources/**",
-            infoPlist: .default,
-            bundleId: "\(bundleId).interface"
-        )
-    }
-
-    var testingTarget: Target {
-        Target(
-            name: "\(name)\(testingSufix)",
-            sources: testingPrefix + "/Sources/**",
-            resources: testingPrefix + "/Resources/**",
             infoPlist: .default,
             bundleId: "\(bundleId).interface"
         )
