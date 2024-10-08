@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SignInFeature
 
 struct MainView: View {
     var body: some View {
@@ -14,6 +15,8 @@ struct MainView: View {
             Image(.launchscreenLogo)
             Text("Hello, World!")
                 .foregroundStyle(.launchscreenBackground)
+            SignInView()
+                .background(.white)
         }
     }
 }
