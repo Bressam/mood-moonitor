@@ -4,9 +4,7 @@ import ProjectDescriptionHelpers
 let project = Project.module(
     name: "SignInFeature",
     bundleIdPrefix: "dev.bressam.mood-moonitor",
-    implementationDependencies: [
-        .project(target: "SignInDomain", path: "../Domain")
-    ],
+    implementationDependencies: [],
     interfaceDependencies: [
         .project(target: "SignInDomainInterface", path: "../Domain")
     ],
