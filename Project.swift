@@ -5,7 +5,9 @@ let project = Project.project(
     name: "MoodMoonitor",
     appName: "Mood Moonitor",
     bundleId: "dev.bressam.mood-moonitor",
-    dependencies: [],
+    dependencies: [
+        .project(target: "SignIn", path: "./Modules/SignIn")
+    ],
     disableBundleAccessors: false,
     disableSynthesizedResourceAccessors: false
 )
