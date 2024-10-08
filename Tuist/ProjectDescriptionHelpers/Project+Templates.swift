@@ -129,6 +129,8 @@ extension Project {
         }
         
         // MARK: Main Target
+        let interfaceTarget: [ProjectDescription.TargetDependency] = hasInterface ? [ .target(name: module.interfaceTarget.name) ] : []
+    
         moduleTargets.append(
             .target(
                 name: module.mainTarget.name,
@@ -141,9 +143,7 @@ extension Project {
                 sources: module.mainTarget.sources,
                 resources: module.mainTarget.resources,
                 scripts: [.swiftLint],
-                dependencies: implementationDependencies + [
-                    .target(name: module.interfaceTarget.name)
-                ]
+                dependencies: implementationDependencies + interfaceTarget
             )
         )
         
