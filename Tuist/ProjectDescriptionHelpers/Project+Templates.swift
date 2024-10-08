@@ -79,7 +79,7 @@ extension Project {
     public static func module(
         name: String,
         organizationName: String = "dev.bressam",
-        bundleId: String,
+        bundleIdPrefix: String,
         deploymentTarget: DeploymentTargets = .iOS("17.0"),
         dependencies: [ProjectDescription.TargetDependency] = [],
         packages: [ProjectDescription.Package] = [],
@@ -87,7 +87,8 @@ extension Project {
         disableSynthesizedResourceAccessors: Bool = false
     ) -> Project {
         let testPlanFile = "AllTests.xctestplan"
-        let module = Module(name: name, bundleId: bundleId)
+        let module = Module(name: name,
+                            bundleId: bundleIdPrefix + "." + name)
         
         // MARK: - Schemes definition
         let mainScheme: Scheme = .scheme(
