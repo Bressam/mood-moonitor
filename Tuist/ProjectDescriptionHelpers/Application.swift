@@ -1,7 +1,7 @@
 import Foundation
 import ProjectDescription
 
-struct Module {
+struct Application {
     let name: String
     let bundleId: String
     
@@ -17,30 +17,16 @@ struct Module {
     var mainTarget: Target {
         Target(
             name: name,
-            sources: implementationPrefix + "/Sources/**",
-            resources: implementationPrefix + "/Resources/**",
-            infoPlist: .default,
+            sources: "Sources/**",
+            resources: "Resources/**",
+            infoPlist: .extendingDefault(with: [
+                "UILaunchScreen" : [
+                    "UIColorName": "launchscreen-background",
+                    "UIImageName": "launchscreen-logo"
+                ],
+                "UILaunchStoryboardName" : "Launch Screen.storyboard"
+            ]),
             bundleId: bundleId
-        )
-    }
-    
-    var interfaceTarget: Target {
-        Target(
-            name: "\(name)\(interfaceSufix)",
-            sources: interfacePrefix + "/Sources/**",
-            resources: interfacePrefix + "/Resources/**",
-            infoPlist: .default,
-            bundleId: "\(bundleId).interface"
-        )
-    }
-
-    var testingTarget: Target {
-        Target(
-            name: "\(name)\(testingSufix)",
-            sources: testingPrefix + "/Sources/**",
-            resources: testingPrefix + "/Resources/**",
-            infoPlist: .default,
-            bundleId: "\(bundleId).interface"
         )
     }
 

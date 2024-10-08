@@ -5,6 +5,7 @@ import Foundation
 import ProjectDescription
 
 extension Project {
+// MARK: - Project
     public static func project(
         name: String,
         appName: String,
@@ -17,35 +18,35 @@ extension Project {
         disableSynthesizedResourceAccessors: Bool = false
     ) -> Project {
         let testPlanFile = "AllTests.xctestplan"
-        let module = Module(name: name, bundleId: bundleId)
+        let application = Application(name: name, bundleId: bundleId)
 
-        // MARK: - Schemes definition
+        // MARK: Schemes definition
         let mainScheme: Scheme = .scheme(
-            name: module.mainTarget.name,
+            name: application.mainTarget.name,
             shared: false,
             buildAction: .buildAction(
-                targets: [.target(module.mainTarget.name)]
+                targets: [.target(application.mainTarget.name)]
             ),
             testAction: .testPlans([
                 .relativeToManifest(testPlanFile)
             ])
         )
 
-        // MARK: - Targets definition
+        // MARK: Targets definition
         var projectTargets = [Target]()
 
-        // MARK: - Main Target
+        // MARK: Main Target
         projectTargets.append(
             .target(
                 name: name,
                 destinations: .iOS,
                 product: .app,
                 productName: appName,
-                bundleId: module.mainTarget.bundleId,
+                bundleId: application.mainTarget.bundleId,
                 deploymentTargets: deploymentTarget,
-                infoPlist: module.mainTarget.infoPlist,
-                sources: module.mainTarget.sources,
-                resources: module.mainTarget.resources,
+                infoPlist: application.mainTarget.infoPlist,
+                sources: application.mainTarget.sources,
+                resources: application.mainTarget.resources,
                 scripts: [.swiftLint],
                 dependencies: dependencies
             )
@@ -75,7 +76,8 @@ extension Project {
             resourceSynthesizers: [.assets()]
         )
     }
-    
+  
+// MARK: - Module
     public static func module(
         name: String,
         organizationName: String = "dev.bressam",
@@ -90,7 +92,7 @@ extension Project {
         let module = Module(name: name,
                             bundleId: bundleIdPrefix + "." + name)
         
-        // MARK: - Schemes definition
+        // MARK: Schemes definition
         let mainScheme: Scheme = .scheme(
             name: module.mainTarget.name,
             shared: false,
@@ -102,23 +104,42 @@ extension Project {
             ])
         )
         
-        // MARK: - Targets definition
-        var projectTargets = [Target]()
+        // MARK: Targets definition
+        var moduleTargets = [Target]()
         
-        // MARK: - Main Target
-        projectTargets.append(
+        // MARK: Interface
+        moduleTargets.append(
             .target(
-                name: name,
+                name: module.interfaceTarget.name,
                 destinations: .iOS,
                 product: .framework,
-                productName: name,
+                productName: module.interfaceTarget.name,
+                bundleId: module.interfaceTarget.bundleId,
+                deploymentTargets: deploymentTarget,
+                infoPlist: module.interfaceTarget.infoPlist,
+                sources: module.interfaceTarget.sources,
+                resources: module.interfaceTarget.resources,
+                scripts: [.swiftLint],
+                dependencies: dependencies
+            )
+        )
+        
+        // MARK: Main Target
+        moduleTargets.append(
+            .target(
+                name: module.mainTarget.name,
+                destinations: .iOS,
+                product: .framework,
+                productName: module.mainTarget.name,
                 bundleId: module.mainTarget.bundleId,
                 deploymentTargets: deploymentTarget,
                 infoPlist: module.mainTarget.infoPlist,
                 sources: module.mainTarget.sources,
                 resources: module.mainTarget.resources,
                 scripts: [.swiftLint],
-                dependencies: dependencies
+                dependencies: dependencies + [
+                    .target(name: module.interfaceTarget.name)
+                ]
             )
         )
         
@@ -136,7 +157,7 @@ extension Project {
                 disableSynthesizedResourceAccessors: disableSynthesizedResourceAccessors
             ),
             packages: packages,
-            targets: projectTargets,
+            targets: moduleTargets,
             schemes: [mainScheme],
             resourceSynthesizers: [.assets()]
         )
