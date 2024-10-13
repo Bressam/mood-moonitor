@@ -2,13 +2,12 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.module(
-    name: "SignInDomain",
+    name: "ModuleDomain",
     bundleIdPrefix: "dev.bressam.mood-moonitor",
-    implementationDependencies: [
-        .project(target: "SignInData", path: "../Data")
-    ],
-    interfaceDependencies: [
-        .project(target: "SignInDataInterface", path: "../Data")
+    implementationDependencies: [],
+    interfaceDependencies: [],
+    testDependencies: [
+        .project(target: "ModuleTesting", path: "../Testing")
     ],
     disableBundleAccessors: true,
     disableSynthesizedResourceAccessors: false
