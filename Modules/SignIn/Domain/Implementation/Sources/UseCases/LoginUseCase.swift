@@ -8,8 +8,14 @@
 
 import SignInDomainInterface
 
-class LoginUseCase: LoginUseCaseProtocol {
-    func login(with credentials: LoginCredentials) async throws -> AuthResult {
-        return .init()
+public class LoginUseCase: LoginUseCaseProtocol {
+    private let repository: GetAuthDataRepositoryProtocol
+
+    public init(repository: GetAuthDataRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    public func login(with credentials: LoginCredentials) async throws -> AuthResult {
+        return try await repository.getAuthData()
     }
 }
