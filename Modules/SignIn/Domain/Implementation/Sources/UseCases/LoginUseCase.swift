@@ -9,7 +9,7 @@
 import SignInDomainInterface
 
 class LoginUseCase: LoginUseCaseProtocol {
-    func login(with credentials: LoginCredentials) async throws -> LoginResult {
+    func login(with credentials: LoginCredentials) async throws -> AuthResult {
         return .init()
     }
 }
