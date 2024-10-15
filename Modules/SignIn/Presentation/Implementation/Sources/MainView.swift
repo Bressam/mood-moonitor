@@ -12,7 +12,26 @@ public struct SignInView: View {
     public init() { }
 
     public var body: some View {
-        Text("Hello, SignIn Feature!")
+        VStack(alignment: .center) {
+            TextField("Username", text: .constant(""))
+                .textFieldStyle(.roundedBorder)
+                .autocapitalization(.none)
+                .keyboardType(.emailAddress)
+                .font(.callout)
+                .foregroundStyle(.gray)
+            TextField("Password", text: .constant(""))
+                .textFieldStyle(.roundedBorder)
+                .autocapitalization(.none)
+                .keyboardType(.default)
+                .font(.callout)
+                .foregroundStyle(.red)
+
+            Button {
+                print("Login tapped")
+            } label: {
+                Text("Login")
+            }
+        }.padding([.leading, .trailing], 26)
     }
 }
 

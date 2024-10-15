@@ -13,10 +13,9 @@ struct MainView: View {
     var body: some View {
         ZStack {
             Image(.launchscreenLogo)
-            Text("Hello, World!")
-                .foregroundStyle(.launchscreenBackground)
+                .resizable()
+                .opacity(0.8)
             SignInView()
-                .background(.white)
         }
     }
 }
