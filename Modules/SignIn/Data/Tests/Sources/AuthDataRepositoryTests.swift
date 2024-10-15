@@ -8,7 +8,7 @@
 
 import XCTest
 
-class GetAuthDataRepositoryTests: XCTestCase {
+class AuthDataRepositoryTests: XCTestCase {
     override func setUp() {
     }
     

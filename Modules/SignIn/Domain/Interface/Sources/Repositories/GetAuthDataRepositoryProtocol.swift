@@ -7,6 +7,6 @@
 //
 import SignInDomainInterface
 
-public protocol GetAuthDataRepositoryProtocol: AnyObject {
+public protocol AuthDataRepositoryProtocol: AnyObject {
     func getAuthData() async throws -> AuthResult
 }

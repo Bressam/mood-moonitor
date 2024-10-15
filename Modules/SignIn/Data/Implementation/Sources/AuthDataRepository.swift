@@ -1,5 +1,5 @@
 //
-//  GetAuthDataRepository.swift
+//  AuthDataRepository.swift
 //  SignInData
 //
 //  Created by Giovanne Bressam on 15/10/24.
@@ -8,12 +8,12 @@
 
 import SignInDomainInterface
 
-public class GetAuthDataRepository: GetAuthDataRepositoryProtocol {
-    private let localAuthDataRepository: GetAuthDataRepositoryProtocol
-    private let remoteAuthDataRepository: GetAuthDataRepositoryProtocol
+public class AuthDataRepository: AuthDataRepositoryProtocol {
+    private let localAuthDataRepository: AuthDataRepositoryProtocol
+    private let remoteAuthDataRepository: AuthDataRepositoryProtocol
     
-    public init(localAuthDataRepository: GetAuthDataRepositoryProtocol,
-                remoteAuthDataRepository: GetAuthDataRepositoryProtocol) {
+    public init(localAuthDataRepository: AuthDataRepositoryProtocol,
+                remoteAuthDataRepository: AuthDataRepositoryProtocol) {
         self.localAuthDataRepository = localAuthDataRepository
         self.remoteAuthDataRepository = remoteAuthDataRepository
     }
