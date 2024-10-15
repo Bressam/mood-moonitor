@@ -9,9 +9,9 @@
 import SignInDomainInterface
 
 public class LoginUseCase: LoginUseCaseProtocol {
-    private let repository: GetAuthDataRepositoryProtocol
+    private let repository: AuthDataRepositoryProtocol
 
-    public init(repository: GetAuthDataRepositoryProtocol) {
+    public init(repository: AuthDataRepositoryProtocol) {
         self.repository = repository
     }
 
