@@ -67,10 +67,8 @@ extension Project {
             ),
             packages: packages,
             settings: .settings(
-                base: [
-                "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES",
-                "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
-                ]),
+                base: .baseSettings
+            ),
             targets: projectTargets,
             schemes: [mainScheme],
             resourceSynthesizers: [.assets()]
@@ -182,6 +180,9 @@ extension Project {
                 disableSynthesizedResourceAccessors: disableSynthesizedResourceAccessors
             ),
             packages: packages,
+            settings: .settings(
+                base: .moduleSettings
+            ),
             targets: moduleTargets,
             schemes: [mainScheme],
             resourceSynthesizers: [.assets()]
