@@ -11,7 +11,7 @@ import XCTest
 class AuthDataRepositoryTests: XCTestCase {
     override func setUp() {
     }
-    
+
     func test_local_storage_should_be_used_if_available() {
         XCTAssertTrue(true)
     }

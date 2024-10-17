@@ -11,7 +11,7 @@ import XCTest
 class LoginUseCaseTests: XCTestCase {
     override func setUp() {
     }
-    
+
     func test_loginshould_return_success() {
         XCTAssertTrue(true)
     }

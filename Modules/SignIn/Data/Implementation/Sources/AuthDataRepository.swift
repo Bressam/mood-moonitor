@@ -11,7 +11,7 @@ import SignInDomainInterface
 public class AuthDataRepository: AuthDataRepositoryProtocol {
     private let localAuthDataRepository: AuthDataRepositoryProtocol
     private let remoteAuthDataRepository: AuthDataRepositoryProtocol
-    
+
     public init(localAuthDataRepository: AuthDataRepositoryProtocol,
                 remoteAuthDataRepository: AuthDataRepositoryProtocol) {
         self.localAuthDataRepository = localAuthDataRepository
