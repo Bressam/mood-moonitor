@@ -5,7 +5,6 @@ let project = Project.module(
     name: "SignInFeature",
     bundleIdPrefix: "dev.bressam.mood-moonitor",
     implementationDependencies: [
-        .target(name: "SignInFeatureInterface"),
         .project(target: "SignInDomain", path: "../Domain"),
         .project(target: "SignInData", path: "../Data")
     ],
