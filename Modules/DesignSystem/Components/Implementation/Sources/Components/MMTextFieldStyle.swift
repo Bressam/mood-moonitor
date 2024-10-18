@@ -28,7 +28,7 @@ public enum MMTextFieldStyle {
     var buttonTitle: String {
         switch self {
         case .regular: ""
-        case .password: "Recuperar senha"
+        case .password: "Forgot password?"
         }
     }
 }
@@ -38,20 +38,23 @@ public struct MMTextField: View {
     @State var inputText: String
     @State var isSecured: Bool
     @State var style: MMTextFieldStyle
-    var buttonAction: (() -> Void)?
+    let forgotPasswordTitle: String?
+    var forgetPasswordAction: (() -> Void)?
     @State private var storePassword: Bool
-    
+
     public init(fieldTitle: String,
                 inputText: String,
                 isSecured: Bool = false,
                 style: MMTextFieldStyle = .regular,
-                buttonAction: (() -> Void)? = nil,
+                forgotPasswordTitle: String? = nil,
+                forgetPasswordAction: (() -> Void)? = nil,
                 storePassword: Bool = true) {
         self.fieldTitle = fieldTitle
         self.inputText = inputText
         self.isSecured = isSecured
         self.style = style
-        self.buttonAction = buttonAction
+        self.forgotPasswordTitle = forgotPasswordTitle
+        self.forgetPasswordAction = forgetPasswordAction
         self.storePassword = storePassword
     }
 
@@ -63,10 +66,11 @@ public struct MMTextField: View {
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundStyle(.gray)
-                if let buttonAction {
+                if let forgetPasswordAction {
                     Spacer()
-                    Button(action: buttonAction, label: {
-                        Text(style.buttonTitle)
+                    Button(action: forgetPasswordAction,
+                           label: {
+                        Text(forgotPasswordTitle ?? style.buttonTitle)
                     })
                 }
             }

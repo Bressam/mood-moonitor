@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum SpacingTokens {
+public enum SpacingTokens {
     case xsmall, small, medium, xmedium, large, xlarge, xxlarge
-    
-    var constant: CGFloat {
+
+    public var constant: CGFloat {
         switch self {
         case .xsmall: return 4
         case .small: return 8
@@ -23,10 +23,10 @@ enum SpacingTokens {
     }
 }
 
-enum ButtonSizeTokens {
+public enum ButtonSizeTokens {
     case large, appleSignIn
-    
-    var constant: CGFloat {
+
+    public var constant: CGFloat {
         switch self {
         case .large: return 46
         case .appleSignIn: return 48
@@ -34,10 +34,10 @@ enum ButtonSizeTokens {
     }
 }
 
-enum RadiusTokens {
+public enum RadiusTokens {
     case small
-    
-    var constant: CGFloat {
+
+    public var constant: CGFloat {
         switch self {
         case .small: return 8
         }
