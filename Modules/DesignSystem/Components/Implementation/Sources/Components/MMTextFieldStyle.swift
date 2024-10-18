@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-enum MMTextFieldStyle {
+public enum MMTextFieldStyle {
     case regular, password
 
     var hasSecurityToggle: Bool {
@@ -33,15 +33,29 @@ enum MMTextFieldStyle {
     }
 }
 
-struct MMTextField: View {
+public struct MMTextField: View {
     @State var fieldTitle: String
     @State var inputText: String
-    @State var isSecured: Bool = false
-    @State var style: MMTextFieldStyle = .regular
+    @State var isSecured: Bool
+    @State var style: MMTextFieldStyle
     var buttonAction: (() -> Void)?
-    @State private var storePassword: Bool = true
+    @State private var storePassword: Bool
+    
+    public init(fieldTitle: String,
+                inputText: String,
+                isSecured: Bool = false,
+                style: MMTextFieldStyle = .regular,
+                buttonAction: (() -> Void)? = nil,
+                storePassword: Bool = true) {
+        self.fieldTitle = fieldTitle
+        self.inputText = inputText
+        self.isSecured = isSecured
+        self.style = style
+        self.buttonAction = buttonAction
+        self.storePassword = storePassword
+    }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading,
                spacing: SpacingTokens.xsmall.constant) {
             HStack {
