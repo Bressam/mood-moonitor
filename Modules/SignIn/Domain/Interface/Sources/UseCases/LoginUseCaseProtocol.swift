@@ -7,5 +7,5 @@
 //
 
 public protocol LoginUseCaseProtocol: AnyObject {
-    func login(with credentials: LoginCredentials) async throws -> AuthResult
+    func login(with credentials: LoginCredentials) async throws -> AuthData
 }

@@ -7,5 +7,5 @@
 //
 
 public protocol AuthDataRepositoryProtocol: AnyObject {
-    func getAuthData() async throws -> AuthResult
+    func getAuthData() async throws -> AuthData
 }

@@ -1,11 +1,11 @@
 //
 //  AuthResult.swift
-//  SignInDomain
+//  SignInData
 //
-//  Created by Giovanne Bressam on 13/10/24.
+//  Created by Giovanne Bressam on 17/10/24.
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
-public struct AuthResult: Decodable {
+public struct AuthResult: Encodable {
     public init() {}
 }

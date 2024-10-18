@@ -15,7 +15,7 @@ public class LoginUseCase: LoginUseCaseProtocol {
         self.repository = repository
     }
 
-    public func login(with credentials: LoginCredentials) async throws -> AuthResult {
+    public func login(with credentials: LoginCredentials) async throws -> AuthData {
         return try await repository.getAuthData()
     }
 }
