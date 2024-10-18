@@ -158,9 +158,8 @@ extension Project {
                     sources: module.testTarget.sources,
                     resources: module.testTarget.resources,
                     scripts: [.swiftLint],
-                    dependencies: testDependencies + [
-                        .target(name: module.mainTarget.name),
-                        .target(name: module.interfaceTarget.name)
+                    dependencies: testDependencies + interfaceTarget + [
+                        .target(name: module.mainTarget.name)
                     ]
                 )
             )
