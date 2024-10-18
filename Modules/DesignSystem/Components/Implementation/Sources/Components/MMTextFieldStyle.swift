@@ -125,7 +125,7 @@ public struct MMTextField: View {
     private var storePasswordSwitch: some View {
         HStack {
             Toggle(isOn: $storePassword, label: {
-                Text("Lembrar minha senha")
+                Text("Remember password")
                     .font(.caption)
             })
         }
