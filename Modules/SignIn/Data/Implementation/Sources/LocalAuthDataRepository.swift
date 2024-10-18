@@ -9,7 +9,7 @@
 import SignInDomainInterface
 
 public class LocalAuthDataRepository: AuthDataRepositoryProtocol {
-    public func getAuthData() async throws -> SignInDomainInterface.AuthResult {
-        return .init()
+    public func getAuthData() async throws -> SignInDomainInterface.AuthData {
+        return .init(authToken: "", refreshToken: "")
     }
 }

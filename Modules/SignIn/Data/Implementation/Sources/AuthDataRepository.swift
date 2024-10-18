@@ -18,7 +18,7 @@ public class AuthDataRepository: AuthDataRepositoryProtocol {
         self.remoteAuthDataRepository = remoteAuthDataRepository
     }
 
-    public func getAuthData() async throws -> SignInDomainInterface.AuthResult {
+    public func getAuthData() async throws -> SignInDomainInterface.AuthData {
         do {
             return try await localAuthDataRepository.getAuthData()
         } catch {
