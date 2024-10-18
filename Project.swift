@@ -6,6 +6,8 @@ let project = Project.project(
     appName: "Mood Moonitor",
     bundleId: "dev.bressam.mood-moonitor",
     dependencies: [
+        .project(target: "DesignSystem",
+                 path: "./Modules/DesignSystem/Components"),
         .project(target: "SignInFeature",
                  path: "./Modules/SignIn/Presentation"),
         .project(target: "SignInFeatureInterface",

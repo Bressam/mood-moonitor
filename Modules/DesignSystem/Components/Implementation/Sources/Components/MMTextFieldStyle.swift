@@ -10,21 +10,21 @@ import SwiftUI
 
 enum MMTextFieldStyle {
     case regular, password
-    
+
     var hasSecurityToggle: Bool {
         switch self {
         case .regular: false
         case .password: true
         }
     }
-    
+
     var hasStorePasswordSwitch: Bool {
         switch self {
         case .regular: false
         case .password: true
         }
     }
-    
+
     var buttonTitle: String {
         switch self {
         case .regular: ""
@@ -38,9 +38,9 @@ struct MMTextField: View {
     @State var inputText: String
     @State var isSecured: Bool = false
     @State var style: MMTextFieldStyle = .regular
-    var buttonAction: (() -> Void)? = nil
+    var buttonAction: (() -> Void)?
     @State private var storePassword: Bool = true
-    
+
     var body: some View {
         VStack(alignment: .leading,
                spacing: SpacingTokens.xsmall.constant) {
@@ -56,7 +56,7 @@ struct MMTextField: View {
                     })
                 }
             }
-            
+
             HStack {
                 inputField
                     .padding(.leading, SpacingTokens.small.constant)
@@ -80,14 +80,14 @@ struct MMTextField: View {
                 RoundedRectangle(cornerRadius: RadiusTokens.small.constant)
                     .stroke(lineWidth: 2.5)
             }
-            
+
             if style.hasStorePasswordSwitch {
                 storePasswordSwitch
                     .padding(.top, SpacingTokens.xsmall.constant)
             }
         }
     }
-    
+
     @ViewBuilder
     private var inputField: some View {
         if isSecured {
@@ -103,7 +103,7 @@ struct MMTextField: View {
                 .foregroundStyle(.gray)
         }
     }
-    
+
     private var storePasswordSwitch: some View {
         HStack {
             Toggle(isOn: $storePassword, label: {
@@ -114,13 +114,15 @@ struct MMTextField: View {
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
+#Preview("MMTextField - Not secured",
+         traits: .sizeThatFitsLayout) {
     MMTextField(fieldTitle: "Field title",
                 inputText: "")
         .padding(24)
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
+#Preview("MMTextField - Secured",
+         traits: .sizeThatFitsLayout) {
     MMTextField(fieldTitle: "Field title",
                 inputText: "",
                 isSecured: true,
