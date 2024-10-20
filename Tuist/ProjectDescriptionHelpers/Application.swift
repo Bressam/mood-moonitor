@@ -19,13 +19,7 @@ struct Application {
             name: name,
             sources: "Sources/**",
             resources: "Resources/**",
-            infoPlist: .extendingDefault(with: [
-                "UILaunchScreen" : [
-                    "UIColorName": "launchscreen-background",
-                    "UIImageName": "launchscreen-logo"
-                ],
-                "UILaunchStoryboardName" : "Launch Screen.storyboard"
-            ]),
+            infoPlist: .mainAppInfoPlist,
             bundleId: bundleId
         )
     }

@@ -13,3 +13,17 @@ extension ProjectDescription.SettingsDictionary {
         "MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS": "gnu11 gnu++14"
     ]
 }
+
+extension ProjectDescription.InfoPlist {
+    static let mainAppInfoPlist: InfoPlist = {
+        let plist: [String: Plist.Value] = [
+            // LaunchScreen
+            "UILaunchScreen" : [
+                "UIColorName": "launchscreen-background",
+                "UIImageName": "launchscreen-logo"
+            ],
+            "UILaunchStoryboardName" : "Launch Screen.storyboard",
+        ]
+        return .extendingDefault(with: plist)
+    }()
+}
