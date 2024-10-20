@@ -9,12 +9,18 @@
 import UIKit
 import SwiftUI
 import CoordinatorInterface
+import SignInFeatureInterface
+import SignInFeature
 
 class MainCoordinator: CoordinatorProtocol {
     let navigationController: UINavigationController = .init()
+    let signInCoordinator: SignInCoordinatorProtocol
+    
+    init() {
+        self.signInCoordinator = SignInMainCoordinator(navigationController: navigationController)
+    }
     
     func start() {
-        let vc = UIHostingController(rootView: MainView())
-        navigationController.pushViewController(vc, animated: false)
+        signInCoordinator.start()
     }
 }
