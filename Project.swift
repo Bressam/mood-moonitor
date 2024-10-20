@@ -5,7 +5,12 @@ let project = Project.project(
     name: "MoodMoonitor",
     appName: "Mood Moonitor",
     bundleId: "dev.bressam.mood-moonitor",
-    dependencies: [],
+    dependencies: [
+        .project(target: "CoordinatorInterface",
+                 path: "./Modules/CoordinatorModule/Coordinator"),
+        .project(target: "Coordinator",
+                 path: "./Modules/CoordinatorModule/Coordinator")
+    ],
     disableBundleAccessors: false,
     disableSynthesizedResourceAccessors: false
 )
