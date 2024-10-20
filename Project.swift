@@ -8,6 +8,10 @@ let project = Project.project(
     dependencies: [
         .project(target: "DesignSystem",
                  path: "./Modules/DesignSystem/Components"),
+        .project(target: "CoordinatorInterface",
+                 path: "./Modules/CoordinatorModule/Coordinator"),
+        .project(target: "Coordinator",
+                 path: "./Modules/CoordinatorModule/Coordinator"),
         .project(target: "SignInFeature",
                  path: "./Modules/SignIn/Presentation"),
         .project(target: "SignInFeatureInterface",
