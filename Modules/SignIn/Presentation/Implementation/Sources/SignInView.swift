@@ -21,7 +21,7 @@ public struct SignInView: View {
                         inputText: "",
                         isSecured: true,
                         style: .password,
-                        forgotPasswordTitle: "Forgot password?",
+                        forgotPasswordTitle: "Forgot password? ",
                         forgetPasswordAction: didTapForgetPassword)
 
             Button {

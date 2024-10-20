@@ -64,13 +64,15 @@ public struct MMTextField: View {
             HStack {
                 Text(fieldTitle)
                     .font(.callout)
-                    .fontWeight(.bold)
+                    .fontWeight(.regular)
                     .foregroundStyle(.gray)
                 if let forgetPasswordAction {
                     Spacer()
                     Button(action: forgetPasswordAction,
                            label: {
                         Text(forgotPasswordTitle ?? style.buttonTitle)
+                            .font(.footnote)
+                            .foregroundStyle(.purple)
                     })
                 }
             }
@@ -96,11 +98,11 @@ public struct MMTextField: View {
             }
             .overlay {
                 RoundedRectangle(cornerRadius: RadiusTokens.small.constant)
-                    .stroke(lineWidth: 2.5)
+                    .stroke(lineWidth: 0.5)
             }
 
             if style.hasStorePasswordSwitch {
-                storePasswordSwitch
+                staySignedInSwitch
                     .padding(.top, SpacingTokens.xsmall.constant)
             }
         }
@@ -122,13 +124,17 @@ public struct MMTextField: View {
         }
     }
 
-    private var storePasswordSwitch: some View {
-        HStack {
-            Toggle(isOn: $storePassword, label: {
-                Text("Remember password")
-                    .font(.caption)
-            })
-        }
+    private var staySignedInSwitch: some View {
+        Toggle(isOn: $storePassword, label: {
+            HStack {
+                Spacer()
+                Text("Stay signed in")
+                    .fontWeight(.regular)
+                    .foregroundStyle(.gray)
+            }
+        })
+        .scaleEffect(0.7)
+        .offset(x: 50)
     }
 }
 
@@ -144,6 +150,10 @@ public struct MMTextField: View {
     MMTextField(fieldTitle: "Field title",
                 inputText: "",
                 isSecured: true,
-                style: .password)
+                style: .password,
+                forgotPasswordTitle: "Forgot password? ",
+                forgetPasswordAction: {
+                    print("Forgot password")
+                })
     .padding(24)
 }
