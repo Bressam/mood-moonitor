@@ -10,22 +10,22 @@ import UIKit
 import SwiftUI
 import SignInFeatureInterface
 
-class SignInMainCoordinator: SignInCoordinatorProtocol {
-    let navigationController: UINavigationController
+public class SignInMainCoordinator: SignInCoordinatorProtocol {
+    public let navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
+    public init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
-    func start() {
+    public func start() {
         navigateToSignIn()
     }
     
-    func navigateToForgotPassword() {
+    public func navigateToForgotPassword() {
         // TODO: Implement forgot password flow
     }
     
-    func navigateToSignIn() {
+    public func navigateToSignIn() {
         let signInViewController = UIHostingController(rootView: SignInView())
         navigationController.pushViewController(signInViewController, animated: true)
     }
