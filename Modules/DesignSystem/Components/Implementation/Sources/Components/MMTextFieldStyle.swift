@@ -72,7 +72,7 @@ public struct MMTextField: View {
                            label: {
                         Text(forgotPasswordTitle ?? style.buttonTitle)
                             .font(.footnote)
-                            .foregroundStyle(.purple)
+                            .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                     })
                 }
             }

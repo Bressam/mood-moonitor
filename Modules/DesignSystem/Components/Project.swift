@@ -10,6 +10,6 @@ let project = Project.module(
     testDependencies: [
         .project(target: "DesignSystemTesting", path: "../Testing")
     ],
-    disableBundleAccessors: true,
+    disableBundleAccessors: false,
     disableSynthesizedResourceAccessors: false
 )
