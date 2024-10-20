@@ -29,7 +29,8 @@ public struct SignInView: View {
             } label: {
                 Text("Login")
             }
-        }.padding([.leading, .trailing], 26)
+        }.padding([.leading, .trailing],
+                  SpacingTokens.large.constant)
     }
 
     private func didTapForgetPassword() {
