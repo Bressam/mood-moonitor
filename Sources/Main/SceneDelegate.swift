@@ -9,15 +9,11 @@
 import Foundation
 import UIKit
 import CoordinatorInterface
-import SignInFeatureInterface
-import SignInFeature
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Properties
     var window: UIWindow?
     var mainCoordinator: CoordinatorProtocol!
-    var signInCoordinator: SignInCoordinatorProtocol!
-
     
     // MARK: - Scene setup
     private func setup() {
@@ -39,7 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Dependencies setup
     private func setupCoordinators() {
         mainCoordinator = MainCoordinator()
-        signInCoordinator = SignInMainCoordinator(navigationController: mainCoordinator.navigationController)
         
         mainCoordinator.start()
     }

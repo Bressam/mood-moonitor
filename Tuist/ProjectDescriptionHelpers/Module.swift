@@ -4,20 +4,43 @@ import ProjectDescription
 struct Module {
     let name: String
     let bundleId: String
+    
+    private let implementationPrefix = "Implementation"
+    private let implementationSufix = "Implementation"
+
+    private let interfacePrefix = "Interface"
+    private let interfaceSufix = "Interface"
+
+    private let testsPrefix = "Tests"
+    private let testsSufix = "Tests"
 
     var mainTarget: Target {
         Target(
             name: name,
-            sources: "Sources/**",
-            resources: "Resources/**",
-            infoPlist: .extendingDefault(with: [
-                "UILaunchScreen" : [
-                    "UIColorName": "launchscreen-background",
-                    "UIImageName": "launchscreen-logo"
-                ],
-                "UILaunchStoryboardName" : "Launch Screen.storyboard"
-            ]),
+            sources: implementationPrefix + "/Sources/**",
+            resources: implementationPrefix + "/Resources/**",
+            infoPlist: .default,
             bundleId: bundleId
+        )
+    }
+    
+    var interfaceTarget: Target {
+        Target(
+            name: "\(name)\(interfaceSufix)",
+            sources: interfacePrefix + "/Sources/**",
+            resources: interfacePrefix + "/Resources/**",
+            infoPlist: .default,
+            bundleId: "\(bundleId).interface"
+        )
+    }
+    
+    var testTarget: Target {
+        Target(
+            name: "\(name)\(testsPrefix)",
+            sources: testsPrefix + "/Sources/**",
+            resources: testsPrefix + "/Resources/**",
+            infoPlist: .default,
+            bundleId: "\(bundleId).tests"
         )
     }
 
