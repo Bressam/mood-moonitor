@@ -20,11 +20,11 @@ public class SignInMainCoordinator: SignInCoordinatorProtocol {
     public func start() {
         navigateToSignIn()
     }
-    
+
     public func navigateToForgotPassword() {
         // TODO: Implement forgot password flow
     }
-    
+
     public func navigateToSignIn() {
         let signInViewController = UIHostingController(rootView: SignInView())
         navigationController.pushViewController(signInViewController, animated: true)
