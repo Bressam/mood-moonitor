@@ -8,7 +8,15 @@
 
 import UIKit
 
+@MainActor
 public protocol CoordinatorProtocol: AnyObject {
     var navigationController: UINavigationController { get }
     func start()
+    func dismiss()
+}
+
+public extension CoordinatorProtocol {
+    func dismiss() {
+        navigationController.dismiss(animated: true)
+    }
 }
