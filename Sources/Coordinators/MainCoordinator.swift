@@ -15,14 +15,27 @@ import SignInFeature
 class MainCoordinator: CoordinatorProtocol {
     let navigationController: UINavigationController = .init()
     lazy var signInCoordinator: SignInCoordinatorProtocol = {
-        SignInMainCoordinator(navigationController: navigationController,
-                              signedInCoordinatorHandler: self)
+        let repository = AuthDataRepository(localAuthDataRepository: LocalAuthDataRepository(),
+                                            remoteAuthDataRepository: RemoteAuthDataRepository())
+        return SignInMainCoordinator(signedInCoordinatorHandler: self,
+                                     loginUseCase: LoginUseCase(repository: repository))
     }()
     
     func start() {
-        signInCoordinator.start()
+        DispatchQueue.main.async {
+            self.navigateToSignIn()
+        }
     }
     
+    func navigateToSignIn() {
+        // Uses new NavigationController modally to keep SignIn flow isolated from current navigation controller
+        self.signInCoordinator.navigationController.modalPresentationStyle = .fullScreen
+        self.navigationController.present(self.signInCoordinator.navigationController, animated: false)
+
+        // Starts new flow
+        self.signInCoordinator.start()
+    }
+
     func navigateToSignedInArea() {
         print("Signed In!")
     }
@@ -30,6 +43,11 @@ class MainCoordinator: CoordinatorProtocol {
 
 extension MainCoordinator: SignedInCoordinatorHandlerProtocol {
     func handleSignedIn() {
-        navigateToSignedInArea()
+        Task {
+            await MainActor.run { [weak self] in
+                self?.signInCoordinator.dismiss()
+                self?.navigateToSignedInArea()
+            }
+        }
     }
 }
