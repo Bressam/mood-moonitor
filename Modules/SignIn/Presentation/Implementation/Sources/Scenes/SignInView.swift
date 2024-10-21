@@ -10,7 +10,13 @@ import SwiftUI
 import DesignSystem
 
 public struct SignInView: View {
-    public init() { }
+    @ObservedObject private var viewModel: SignInViewModel
+    private var email: String = ""
+    private var password: String = ""
+
+    public init(signInViewModel: SignInViewModel) {
+        self.viewModel = signInViewModel
+    }
 
     public var body: some View {
         VStack(alignment: .center,
@@ -25,7 +31,10 @@ public struct SignInView: View {
                         forgetPasswordAction: didTapForgetPassword)
 
             Button {
-                print("Login tapped")
+                Task {
+                    await viewModel.signIn(with: .init(username: email,
+                                                       password: password))
+                }
             } label: {
                 Text("Login")
             }

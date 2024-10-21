@@ -9,6 +9,8 @@
 import SignInDomainInterface
 
 public class RemoteAuthDataRepository: AuthDataRepositoryProtocol {
+    public init() {}
+
     public func getAuthData() async throws -> SignInDomainInterface.AuthData {
         return .init(authToken: "", refreshToken: "")
     }

@@ -15,6 +15,7 @@ public class LoginUseCase: LoginUseCaseProtocol {
         self.repository = repository
     }
 
+    @discardableResult
     public func execute(with credentials: LoginCredentials) async throws -> AuthData {
         return try await repository.getAuthData()
     }

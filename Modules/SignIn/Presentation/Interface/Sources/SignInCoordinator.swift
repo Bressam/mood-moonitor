@@ -8,6 +8,9 @@
 import CoordinatorInterface
 
 public protocol SignInCoordinatorProtocol: CoordinatorProtocol {
+    var signedInCoordinatorHandler: SignedInCoordinatorHandlerProtocol? { get }
+
     func navigateToForgotPassword()
     func navigateToSignIn()
+    func navigateToSignedInArea()
 }

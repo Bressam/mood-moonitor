@@ -14,13 +14,22 @@ import SignInFeature
 
 class MainCoordinator: CoordinatorProtocol {
     let navigationController: UINavigationController = .init()
-    let signInCoordinator: SignInCoordinatorProtocol
-    
-    init() {
-        self.signInCoordinator = SignInMainCoordinator(navigationController: navigationController)
-    }
+    lazy var signInCoordinator: SignInCoordinatorProtocol = {
+        SignInMainCoordinator(navigationController: navigationController,
+                              signedInCoordinatorHandler: self)
+    }()
     
     func start() {
         signInCoordinator.start()
+    }
+    
+    func navigateToSignedInArea() {
+        print("Signed In!")
+    }
+}
+
+extension MainCoordinator: SignedInCoordinatorHandlerProtocol {
+    func handleSignedIn() {
+        navigateToSignedInArea()
     }
 }
