@@ -8,7 +8,6 @@ extension Project {
 // MARK: - Project
     public static func project(
         name: String,
-        appName: String,
         organizationName: String = "dev.bressam",
         bundleId: String,
         deploymentTarget: DeploymentTargets = .iOS("17.0"),
@@ -38,10 +37,10 @@ extension Project {
         // MARK: Main Target
         projectTargets.append(
             .target(
-                name: name,
+                name: name + "App",
                 destinations: .iOS,
                 product: .app,
-                productName: appName,
+                productName: name,
                 bundleId: application.mainTarget.bundleId,
                 deploymentTargets: deploymentTarget,
                 infoPlist: application.mainTarget.infoPlist,
