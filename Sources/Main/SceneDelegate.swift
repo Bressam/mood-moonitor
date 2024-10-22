@@ -30,12 +30,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         setup()
         self.window?.rootViewController = mainCoordinator.navigationController
         self.window?.makeKeyAndVisible()
+        mainCoordinator.start()
     }
     
     // MARK: - Dependencies setup
     private func setupCoordinators() {
         mainCoordinator = MainCoordinator()
-        
-        mainCoordinator.start()
     }
 }

@@ -9,10 +9,13 @@
 import UIKit
 
 public class MMNavigationController: UINavigationController {
+    private var isPresentationStyleSetManually = false
+
     public override var modalPresentationStyle: UIModalPresentationStyle {
         get {
-            return super.modalPresentationStyle == .automatic ? .fullScreen : super.modalPresentationStyle
+            return isPresentationStyleSetManually ? super.modalPresentationStyle : .fullScreen
         } set {
+            isPresentationStyleSetManually = true
             super.modalPresentationStyle = newValue
         }
     }

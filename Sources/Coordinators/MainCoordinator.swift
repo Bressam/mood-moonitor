@@ -22,14 +22,12 @@ class MainCoordinator: CoordinatorProtocol {
     }()
     
     func start() {
-        DispatchQueue.main.async {
-            self.navigateToSignIn()
-        }
+        navigateToSignIn()
     }
     
     func navigateToSignIn() {
         // Setup new flow presentation style
-        navigationController.present(self.signInCoordinator.navigationController, animated: false)
+        navigationController.present(signInCoordinator.navigationController, animated: false)
 
         // Starts new flow
         signInCoordinator.start()
