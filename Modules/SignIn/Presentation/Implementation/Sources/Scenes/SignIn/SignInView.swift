@@ -47,6 +47,8 @@ public struct SignInView: View {
     }
 }
 
+#if DEBUG
 #Preview {
-    SignInView()
+    SignInView(signInViewModel: .preview)
 }
+#endif
