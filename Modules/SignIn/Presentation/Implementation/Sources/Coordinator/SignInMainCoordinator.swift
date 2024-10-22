@@ -8,15 +8,16 @@
 
 import UIKit
 import SwiftUI
+import CoordinatorInterface
 import SignInFeatureInterface
 import SignInDomainInterface
 
 public class SignInMainCoordinator: SignInCoordinatorProtocol {
-    public let navigationController: UINavigationController
+    public let navigationController: MMNavigationController
     public weak var signedInCoordinatorHandler: SignedInCoordinatorHandlerProtocol?
     private let loginUseCase: LoginUseCaseProtocol
 
-    public init(navigationController: UINavigationController = .init(),
+    public init(navigationController: MMNavigationController = .init(),
                 signedInCoordinatorHandler: SignedInCoordinatorHandlerProtocol,
                 loginUseCase: LoginUseCaseProtocol) {
         self.navigationController = navigationController

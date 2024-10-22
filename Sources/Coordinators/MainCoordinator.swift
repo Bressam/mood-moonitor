@@ -13,7 +13,7 @@ import SignInFeatureInterface
 import SignInFeature
 
 class MainCoordinator: CoordinatorProtocol {
-    let navigationController: UINavigationController = .init()
+    let navigationController: MMNavigationController = .init()
     lazy var signInCoordinator: SignInCoordinatorProtocol = {
         let repository = AuthDataRepository(localAuthDataRepository: LocalAuthDataRepository(),
                                             remoteAuthDataRepository: RemoteAuthDataRepository())
@@ -28,12 +28,11 @@ class MainCoordinator: CoordinatorProtocol {
     }
     
     func navigateToSignIn() {
-        // Uses new NavigationController modally to keep SignIn flow isolated from current navigation controller
-        self.signInCoordinator.navigationController.modalPresentationStyle = .fullScreen
-        self.navigationController.present(self.signInCoordinator.navigationController, animated: false)
+        // Setup new flow presentation style
+        navigationController.present(self.signInCoordinator.navigationController, animated: false)
 
         // Starts new flow
-        self.signInCoordinator.start()
+        signInCoordinator.start()
     }
 
     func navigateToSignedInArea() {

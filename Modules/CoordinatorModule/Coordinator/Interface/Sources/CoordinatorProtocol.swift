@@ -10,13 +10,15 @@ import UIKit
 
 @MainActor
 public protocol CoordinatorProtocol: AnyObject {
-    var navigationController: UINavigationController { get }
+    var navigationController: MMNavigationController { get }
     func start()
     func dismiss()
 }
 
 public extension CoordinatorProtocol {
     func dismiss() {
-        navigationController.dismiss(animated: true)
+        navigationController.dismiss(animated: true, completion: { [weak self] in
+            self?.navigationController.viewControllers.removeAll()
+        })
     }
 }
