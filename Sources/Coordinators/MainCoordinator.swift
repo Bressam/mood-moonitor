@@ -9,8 +9,12 @@
 import UIKit
 import SwiftUI
 import CoordinatorInterface
+
+// SignIn Feature
 import SignInFeatureInterface
 import SignInFeature
+import SignInDomain
+import SignInData
 
 class MainCoordinator: CoordinatorProtocol {
     let navigationController: MMNavigationController = .init()
