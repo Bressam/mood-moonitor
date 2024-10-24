@@ -34,9 +34,9 @@ public struct SignInView: View {
     private var gradientBackground: some View {
         LinearGradient(
             gradient: Gradient(stops: [
-                Gradient.Stop(color: Color(red: 0.999, green: 0.603, blue: 0.974),
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightPink.swiftUIColor,
                               location: 0.24),
-                Gradient.Stop(color: Color(red: 0.566, green: 0.753, blue: 0.998),
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor,
                               location: 0.76)
             ]),
             startPoint: .top,
