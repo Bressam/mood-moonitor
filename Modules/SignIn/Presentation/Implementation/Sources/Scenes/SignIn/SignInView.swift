@@ -11,8 +11,8 @@ import DesignSystem
 
 public struct SignInView: View {
     @ObservedObject private var viewModel: SignInViewModel
-    private var email: String = ""
-    private var password: String = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
 
     public init(signInViewModel: SignInViewModel) {
         self.viewModel = signInViewModel
@@ -44,9 +44,9 @@ public struct SignInView: View {
         VStack(alignment: .center,
                spacing: SpacingTokens.medium.constant) {
             MMTextField(fieldTitle: "e-mail",
-                        inputText: email)
+                        inputText: $email)
             MMTextField(fieldTitle: "password",
-                        inputText: password,
+                        inputText: $password,
                         isSecured: true,
                         style: .password,
                         forgotPasswordTitle: "Forgot password? ",

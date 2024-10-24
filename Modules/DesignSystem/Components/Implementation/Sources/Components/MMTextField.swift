@@ -35,7 +35,7 @@ public enum MMTextFieldStyle {
 
 public struct MMTextField: View {
     @State var fieldTitle: String
-    @State var inputText: String
+    @Binding var inputText: String
     @State var isSecured: Bool
     @State var style: MMTextFieldStyle
     let forgotPasswordTitle: String?
@@ -43,14 +43,14 @@ public struct MMTextField: View {
     @State private var storePassword: Bool
 
     public init(fieldTitle: String,
-                inputText: String,
+                inputText: Binding<String>,
                 isSecured: Bool = false,
                 style: MMTextFieldStyle = .regular,
                 forgotPasswordTitle: String? = nil,
                 forgetPasswordAction: (() -> Void)? = nil,
                 storePassword: Bool = true) {
         self.fieldTitle = fieldTitle
-        self.inputText = inputText
+        self._inputText = inputText
         self.isSecured = isSecured
         self.style = style
         self.forgotPasswordTitle = forgotPasswordTitle
@@ -140,15 +140,17 @@ public struct MMTextField: View {
 
 #Preview("MMTextField - Not secured",
          traits: .sizeThatFitsLayout) {
+    @Previewable @State var email: String = ""
     MMTextField(fieldTitle: "Field title",
-                inputText: "")
+                inputText: $email)
         .padding(24)
 }
 
 #Preview("MMTextField - Secured",
          traits: .sizeThatFitsLayout) {
+    @Previewable @State var password: String = ""
     MMTextField(fieldTitle: "Field title",
-                inputText: "",
+                inputText: $password,
                 isSecured: true,
                 style: .password,
                 forgotPasswordTitle: "Forgot password? ",
