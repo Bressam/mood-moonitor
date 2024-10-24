@@ -20,26 +20,49 @@ public struct SignInView: View {
 
     public var body: some View {
         VStack(alignment: .center,
+               spacing: SpacingTokens.xxlarge.constant) {
+            appLogo
+            inputFields
+            signInButton
+        }.padding([.leading, .trailing],
+                  SpacingTokens.large.constant)
+    }
+
+    private var appLogo: some View {
+        VStack(alignment: .center,
+               spacing: SpacingTokens.small.constant) {
+            DesignSystemAsset.appLogo.swiftUIImage
+                .resizable()
+                .frame(width: 120, height: 120)
+            Text("Mood Moonitor")
+                .font(.appLargeTitleFont)
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
+        }
+    }
+
+    private var inputFields: some View {
+        VStack(alignment: .center,
                spacing: SpacingTokens.medium.constant) {
             MMTextField(fieldTitle: "e-mail",
-                        inputText: "")
+                        inputText: email)
             MMTextField(fieldTitle: "password",
-                        inputText: "",
+                        inputText: password,
                         isSecured: true,
                         style: .password,
                         forgotPasswordTitle: "Forgot password? ",
                         forgetPasswordAction: didTapForgetPassword)
+        }
+    }
 
-            Button {
-                Task {
-                    await viewModel.signIn(with: .init(username: email,
-                                                       password: password))
-                }
-            } label: {
-                Text("Login")
+    private var signInButton: some View {
+        Button {
+            Task {
+                await viewModel.signIn(with: .init(username: email,
+                                                   password: password))
             }
-        }.padding([.leading, .trailing],
-                  SpacingTokens.large.constant)
+        } label: {
+            Text("Login")
+        }
     }
 
     private func didTapForgetPassword() {
