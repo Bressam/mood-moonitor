@@ -12,17 +12,13 @@ import CoordinatorInterface
 
 // SignIn Feature
 import SignInFeatureInterface
-import SignInFeature
-import SignInDomain
-import SignInData
+
 
 class MainCoordinator: CoordinatorProtocol {
+    // MARK: - Properties
     let navigationController: MMNavigationController = .init()
     lazy var signInCoordinator: SignInCoordinatorProtocol = {
-        let repository = AuthDataRepository(localAuthDataRepository: LocalAuthDataRepository(),
-                                            remoteAuthDataRepository: RemoteAuthDataRepository())
-        return SignInMainCoordinator(signedInCoordinatorHandler: self,
-                                     loginUseCase: LoginUseCase(repository: repository))
+        SignInCoordinatorAssembly.assemble(signedInCoordinatorHandler: self)
     }()
     
     func start() {
