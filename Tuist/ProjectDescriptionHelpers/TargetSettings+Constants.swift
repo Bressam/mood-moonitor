@@ -18,7 +18,7 @@ extension ProjectDescription.InfoPlist {
     static let mainAppInfoPlist: InfoPlist = {
         let plist: [String: Plist.Value] = [
             // AppName
-            "APP_NAME": .string("Mood Moonitor"),
+            "CFBundleDisplayName": .string("Mood Moonitor"),
             // LaunchScreen
             "UILaunchScreen" : [
                 "UIColorName": "launchscreen-background",
