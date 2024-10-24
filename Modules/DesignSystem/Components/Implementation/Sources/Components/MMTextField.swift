@@ -137,7 +137,7 @@ public struct MMTextField: View {
                 Spacer()
                 Text("Stay signed in")
                     .fontWeight(.regular)
-                    .foregroundStyle(DesignSystemAsset.secundaryColor.swiftUIColor)
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
                     .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
                             radius: RadiusTokens.xsmall.constant,
                             x: 0, y: 2)

@@ -34,8 +34,10 @@ public struct SignInView: View {
     private var gradientBackground: some View {
         LinearGradient(
             gradient: Gradient(stops: [
-                Gradient.Stop(color: Color(red: 0.999, green: 0.603, blue: 0.974), location: 0.24),
-                Gradient.Stop(color: Color(red: 0.566, green: 0.913, blue: 0.998), location: 0.76)
+                Gradient.Stop(color: Color(red: 0.999, green: 0.603, blue: 0.974),
+                              location: 0.24),
+                Gradient.Stop(color: Color(red: 0.566, green: 0.753, blue: 0.998),
+                              location: 0.76)
             ]),
             startPoint: .top,
             endPoint: .bottom
