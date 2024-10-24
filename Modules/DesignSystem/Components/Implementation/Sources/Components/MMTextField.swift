@@ -65,7 +65,10 @@ public struct MMTextField: View {
                 Text(fieldTitle)
                     .font(.callout)
                     .fontWeight(.regular)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                    .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
+                            radius: RadiusTokens.xsmall.constant,
+                            x: 0, y: 2)
                 if let forgetPasswordAction {
                     Spacer()
                     Button(action: forgetPasswordAction,
@@ -88,7 +91,7 @@ public struct MMTextField: View {
                     }, label: {
                         if isSecured {
                             Image(systemName: "eye")
-                                .foregroundStyle(.gray.opacity(0.8))
+                                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor.opacity(0.8))
                         } else {
                             Image(systemName: "eye.slash")
                                 .foregroundStyle(.gray.opacity(0.8))
@@ -99,6 +102,10 @@ public struct MMTextField: View {
             .overlay {
                 RoundedRectangle(cornerRadius: RadiusTokens.small.constant)
                     .stroke(lineWidth: 0.5)
+                    .fill(DesignSystemAsset.secondaryColor.swiftUIColor)
+                    .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
+                            radius: RadiusTokens.xsmall.constant,
+                            x: 0, y: 2)
             }
 
             if style.hasStorePasswordSwitch {
@@ -112,7 +119,7 @@ public struct MMTextField: View {
     private var inputField: some View {
         if isSecured {
             SecureField("", text: $inputText)
-                .foregroundStyle(.gray)
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                 .font(.caption2)
                 .fontWeight(.ultraLight)
         } else {
@@ -120,7 +127,7 @@ public struct MMTextField: View {
                 .autocapitalization(.none)
                 .keyboardType(.emailAddress)
                 .font(.callout)
-                .foregroundStyle(.gray)
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
         }
     }
 
@@ -130,7 +137,10 @@ public struct MMTextField: View {
                 Spacer()
                 Text("Stay signed in")
                     .fontWeight(.regular)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(DesignSystemAsset.secundaryColor.swiftUIColor)
+                    .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
+                            radius: RadiusTokens.xsmall.constant,
+                            x: 0, y: 2)
             }
         })
         .scaleEffect(0.7)
