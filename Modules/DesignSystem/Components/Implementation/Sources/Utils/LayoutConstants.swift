@@ -35,11 +35,12 @@ public enum ButtonSizeTokens {
 }
 
 public enum RadiusTokens {
-    case small
+    case small, xsmall
 
     public var constant: CGFloat {
         switch self {
         case .small: return 8
+        case .xsmall: return 4
         }
     }
 }
