@@ -19,13 +19,29 @@ public struct SignInView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .center,
-               spacing: SpacingTokens.xxlarge.constant) {
-            appLogo
-            inputFields
-            signInButton
-        }.padding([.leading, .trailing],
-                  SpacingTokens.large.constant)
+        ZStack {
+            gradientBackground
+            VStack(alignment: .center,
+                   spacing: SpacingTokens.xxlarge.constant) {
+                appLogo
+                inputFields
+                signInButton
+            }.padding([.leading, .trailing],
+                      SpacingTokens.large.constant)
+        }
+    }
+
+    private var gradientBackground: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                Gradient.Stop(color: Color(red: 0.999, green: 0.603, blue: 0.974), location: 0.24),
+                Gradient.Stop(color: Color(red: 0.566, green: 0.913, blue: 0.998), location: 0.76)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .opacity(0.55)
+        .edgesIgnoringSafeArea(.all)
     }
 
     private var appLogo: some View {
@@ -62,6 +78,7 @@ public struct SignInView: View {
             }
         } label: {
             Text("Login")
+                .foregroundColor(DesignSystemAsset.primaryColor.swiftUIColor)
         }
     }
 
