@@ -12,6 +12,7 @@ public class RemoteAuthDataRepository: AuthDataRepositoryProtocol {
     public init() {}
 
     public func getAuthData() async throws -> SignInDomainInterface.AuthData {
+        try await Task.sleep(for: .seconds(2))
         return .init(authToken: "", refreshToken: "")
     }
 }
