@@ -3,6 +3,25 @@
 
 @preconcurrency import PackageDescription
 
+#if TUIST
+// This makes possible to add custom settings for each imported library
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let packageSettings = PackageSettings(
+    productTypes: [
+        // External libraries are static framework by default.
+        // Changing to dynamic framework necessary ones
+        "Lottie": .framework
+    ],
+    projectOptions: [
+        // Tuist can generate resources synthetizers for each external and internal library if necessary
+        "DesignSystem": .options(disableBundleAccessors: false,
+                                 disableSynthesizedResourceAccessors: false)
+    ]
+)
+#endif
+
 let package = Package(
     name: "MoodMoonitor",
     platforms: [
