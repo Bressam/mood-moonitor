@@ -13,7 +13,7 @@ import SignInDomainInterface
 public class SignInViewModel: ObservableObject {
     private weak var coordinator: SignInCoordinatorProtocol?
     private var loginUseCase: LoginUseCaseProtocol
-    
+
     @MainActor
     @Published var isloading: Bool = false
 
@@ -33,8 +33,8 @@ public class SignInViewModel: ObservableObject {
             print("Failed to login: \(error.localizedDescription)")
         }
     }
-    
-    func setLoading(to isLoading: Bool) {
+
+    private func setLoading(to isLoading: Bool) {
         Task {
             await MainActor.run {
                 isloading = isLoading

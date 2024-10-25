@@ -20,9 +20,10 @@ public class AuthDataRepository: AuthDataRepositoryProtocol {
 
     public func getAuthData() async throws -> SignInDomainInterface.AuthData {
         do {
-            return try await localAuthDataRepository.getAuthData()
-        } catch {
             return try await remoteAuthDataRepository.getAuthData()
+        } catch {
+            // Fallback to local data
+            return try await localAuthDataRepository.getAuthData()
         }
     }
 }
