@@ -47,16 +47,16 @@ public struct MMButton: View {
     }
 
     public var body: some View {
-        Button(action: action, label: {
+        Button(action: action) {
             Text(title)
                 .font(style.titleFont)
                 .foregroundColor(style.textColor)
-        })
-        .frame(width: ButtonSizeTokens.large.widthConstant,
-               height: ButtonSizeTokens.large.heightConstant)
-        .background(style.fillColor)
+                .frame(width: ButtonSizeTokens.large.widthConstant,
+                       height: ButtonSizeTokens.large.heightConstant)
+                .background(style.fillColor)
+                .cornerRadius(RadiusTokens.regular.constant)
+        }
         .buttonStyle(.borderless)
-        .cornerRadius(10)
     }
 }
 
