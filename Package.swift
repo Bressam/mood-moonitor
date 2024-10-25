@@ -12,11 +12,15 @@ let package = Package(
         .executable(name: "MoodMoonitor",
                     targets: ["MoodMoonitor"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/airbnb/lottie-ios", exact: "4.5.0")
+    ],
     targets: [
         .target(
             name: "MoodMoonitor",
-            dependencies: [],
+            dependencies: [
+                .product(name: "Lottie", package: "lottie-ios")
+            ],
             path: "Sources"
         )
     ]
