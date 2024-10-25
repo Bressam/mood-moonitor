@@ -52,8 +52,10 @@ public struct MMButton: View {
                 .font(style.titleFont)
                 .foregroundColor(style.textColor)
         })
+        .frame(width: ButtonSizeTokens.large.widthConstant,
+               height: ButtonSizeTokens.large.heightConstant)
         .background(style.fillColor)
-        .buttonStyle(.bordered)
+        .buttonStyle(.borderless)
         .cornerRadius(10)
     }
 }

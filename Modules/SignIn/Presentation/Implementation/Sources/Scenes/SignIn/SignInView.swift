@@ -77,14 +77,11 @@ public struct SignInView: View {
     }
 
     private var signInButton: some View {
-        Button {
+        MMButton(title: "Login") {
             Task {
                 await viewModel.signIn(with: .init(username: email,
                                                    password: password))
             }
-        } label: {
-            Text("Login")
-                .foregroundColor(DesignSystemAsset.primaryColor.swiftUIColor)
         }
     }
 

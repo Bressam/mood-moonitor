@@ -24,12 +24,17 @@ public enum SpacingTokens {
 }
 
 public enum ButtonSizeTokens {
-    case large, appleSignIn
+    case large
 
-    public var constant: CGFloat {
+    public var heightConstant: CGFloat {
         switch self {
-        case .large: return 46
-        case .appleSignIn: return 48
+        case .large: return 44
+        }
+    }
+
+    public var widthConstant: CGFloat {
+        switch self {
+        case .large: return 280
         }
     }
 }
