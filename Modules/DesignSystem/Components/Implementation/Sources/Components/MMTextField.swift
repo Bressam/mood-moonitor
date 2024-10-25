@@ -63,8 +63,7 @@ public struct MMTextField: View {
                spacing: SpacingTokens.xsmall.constant) {
             HStack {
                 Text(fieldTitle)
-                    .font(.callout)
-                    .fontWeight(.regular)
+                    .font(.appCalloutFont)
                     .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
                     .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
                             radius: RadiusTokens.xsmall.constant,
@@ -74,7 +73,7 @@ public struct MMTextField: View {
                     Button(action: forgetPasswordAction,
                            label: {
                         Text(forgotPasswordTitle ?? style.buttonTitle)
-                            .font(.footnote)
+                            .font(.appFootnoteFont)
                             .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                     })
                 }
@@ -120,13 +119,12 @@ public struct MMTextField: View {
         if isSecured {
             SecureField("", text: $inputText)
                 .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
-                .font(.caption2)
-                .fontWeight(.ultraLight)
+                .font(.appCaptionFont)
         } else {
             TextField("", text: $inputText)
                 .autocapitalization(.none)
                 .keyboardType(.emailAddress)
-                .font(.callout)
+                .font(.appCalloutFont)
                 .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
         }
     }
@@ -136,7 +134,7 @@ public struct MMTextField: View {
             HStack {
                 Spacer()
                 Text("Stay signed in")
-                    .fontWeight(.regular)
+                    .font(.appBodyFont)
                     .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
                     .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
                             radius: RadiusTokens.xsmall.constant,

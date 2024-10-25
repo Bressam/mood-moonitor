@@ -5,7 +5,9 @@ let project = Project.module(
     name: "DesignSystem",
     hasInterface: false,
     bundleIdPrefix: "dev.bressam.mood-moonitor",
-    implementationDependencies: [],
+    implementationDependencies: [
+        .external(name: "Lottie")
+    ],
     interfaceDependencies: [],
     testDependencies: [
         .project(target: "DesignSystemTesting", path: "../Testing")
