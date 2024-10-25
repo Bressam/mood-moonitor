@@ -14,6 +14,7 @@ import SwiftUI
 
 public extension Font {
     static let appBodyFont: Font = getAppFont(size: 17)
+    static let appActionFont: Font = getAppFont(size: 17, weight: .medium)
     static let appTitleFont: Font = getAppFont(size: 22, weight: .semibold)
     static let appLargeTitleFont: Font = getAppFont(size: 34, weight: .bold)
     static let appCalloutFont: Font = getAppFont(size: 16, weight: .regular)
