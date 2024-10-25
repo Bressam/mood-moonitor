@@ -26,11 +26,7 @@ class MainCoordinator: CoordinatorProtocol {
     }
     
     func navigateToSignIn() {
-        // Setup new flow presentation style
-        navigationController.present(signInCoordinator.navigationController, animated: false)
-
-        // Starts new flow
-        signInCoordinator.start()
+        startChildFlow(with: signInCoordinator)
     }
 
     func navigateToSignedInArea() {
