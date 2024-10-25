@@ -14,7 +14,7 @@ public enum MMButtonStyle {
     var fillColor: Color {
         switch self {
         case .primary: return DesignSystemAsset.primaryColor.swiftUIColor
-        case .secondary: return DesignSystemAsset.secondaryColor.swiftUIColor.opacity(0.4)
+        case .secondary: return DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2)
         }
     }
 

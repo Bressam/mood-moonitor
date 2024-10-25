@@ -77,7 +77,7 @@ public struct SignInView: View {
     }
 
     private var buttons: some View {
-        VStack(spacing: SpacingTokens.medium.constant) {
+        VStack(spacing: SpacingTokens.small.constant) {
             MMButton(title: "Login") {
                 Task {
                     await viewModel.signIn(with: .init(username: email,
