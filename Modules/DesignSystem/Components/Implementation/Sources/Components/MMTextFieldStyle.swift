@@ -35,7 +35,7 @@ public enum MMTextFieldStyle {
 
 public struct MMTextField: View {
     @State var fieldTitle: String
-    @State var inputText: String
+    @Binding var inputText: String
     @State var isSecured: Bool
     @State var style: MMTextFieldStyle
     let forgotPasswordTitle: String?
@@ -43,14 +43,14 @@ public struct MMTextField: View {
     @State private var storePassword: Bool
 
     public init(fieldTitle: String,
-                inputText: String,
+                inputText: Binding<String>,
                 isSecured: Bool = false,
                 style: MMTextFieldStyle = .regular,
                 forgotPasswordTitle: String? = nil,
                 forgetPasswordAction: (() -> Void)? = nil,
                 storePassword: Bool = true) {
         self.fieldTitle = fieldTitle
-        self.inputText = inputText
+        self._inputText = inputText
         self.isSecured = isSecured
         self.style = style
         self.forgotPasswordTitle = forgotPasswordTitle
@@ -63,15 +63,17 @@ public struct MMTextField: View {
                spacing: SpacingTokens.xsmall.constant) {
             HStack {
                 Text(fieldTitle)
-                    .font(.callout)
-                    .fontWeight(.regular)
-                    .foregroundStyle(.gray)
+                    .font(.appCalloutFont)
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                    .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
+                            radius: RadiusTokens.xsmall.constant,
+                            x: 0, y: 2)
                 if let forgetPasswordAction {
                     Spacer()
                     Button(action: forgetPasswordAction,
                            label: {
                         Text(forgotPasswordTitle ?? style.buttonTitle)
-                            .font(.footnote)
+                            .font(.appFootnoteFont)
                             .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                     })
                 }
@@ -88,7 +90,7 @@ public struct MMTextField: View {
                     }, label: {
                         if isSecured {
                             Image(systemName: "eye")
-                                .foregroundStyle(.gray.opacity(0.8))
+                                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor.opacity(0.8))
                         } else {
                             Image(systemName: "eye.slash")
                                 .foregroundStyle(.gray.opacity(0.8))
@@ -99,6 +101,10 @@ public struct MMTextField: View {
             .overlay {
                 RoundedRectangle(cornerRadius: RadiusTokens.small.constant)
                     .stroke(lineWidth: 0.5)
+                    .fill(DesignSystemAsset.secondaryColor.swiftUIColor)
+                    .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
+                            radius: RadiusTokens.xsmall.constant,
+                            x: 0, y: 2)
             }
 
             if style.hasStorePasswordSwitch {
@@ -112,15 +118,14 @@ public struct MMTextField: View {
     private var inputField: some View {
         if isSecured {
             SecureField("", text: $inputText)
-                .foregroundStyle(.gray)
-                .font(.caption2)
-                .fontWeight(.ultraLight)
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
+                .font(.appCaptionFont)
         } else {
             TextField("", text: $inputText)
                 .autocapitalization(.none)
                 .keyboardType(.emailAddress)
-                .font(.callout)
-                .foregroundStyle(.gray)
+                .font(.appCalloutFont)
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
         }
     }
 
@@ -129,8 +134,11 @@ public struct MMTextField: View {
             HStack {
                 Spacer()
                 Text("Stay signed in")
-                    .fontWeight(.regular)
-                    .foregroundStyle(.gray)
+                    .font(.appBodyFont)
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                    .shadow(color: DesignSystemAsset.lightShadowColor.swiftUIColor,
+                            radius: RadiusTokens.xsmall.constant,
+                            x: 0, y: 2)
             }
         })
         .scaleEffect(0.7)
@@ -140,15 +148,17 @@ public struct MMTextField: View {
 
 #Preview("MMTextField - Not secured",
          traits: .sizeThatFitsLayout) {
+    @Previewable @State var email: String = ""
     MMTextField(fieldTitle: "Field title",
-                inputText: "")
+                inputText: $email)
         .padding(24)
 }
 
 #Preview("MMTextField - Secured",
          traits: .sizeThatFitsLayout) {
+    @Previewable @State var password: String = ""
     MMTextField(fieldTitle: "Field title",
-                inputText: "",
+                inputText: $password,
                 isSecured: true,
                 style: .password,
                 forgotPasswordTitle: "Forgot password? ",
