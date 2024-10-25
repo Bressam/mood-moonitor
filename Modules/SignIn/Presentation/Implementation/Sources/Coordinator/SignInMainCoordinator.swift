@@ -33,6 +33,10 @@ public class SignInMainCoordinator: SignInCoordinatorProtocol {
         // TODO: Implement forgot password flow
     }
 
+    public func navigateToAccountCreation() {
+        // TODO: Implement create account flow
+    }
+
     public func navigateToSignedInArea() {
         signedInCoordinatorHandler?.handleSignedIn()
     }

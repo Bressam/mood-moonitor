@@ -39,11 +39,11 @@ public struct MMButton: View {
     let style: MMButtonStyle
 
     public init(title: String,
-                action: @escaping () -> Void,
-                style: MMButtonStyle = .primary) {
-        self.action = action
+                style: MMButtonStyle = .primary,
+                action: @escaping () -> Void) {
         self.title = title
         self.style = style
+        self.action = action
     }
 
     public var body: some View {
@@ -62,5 +62,6 @@ public struct MMButton: View {
 
 #Preview {
     MMButton(title: "Button title!", action: {})
-    MMButton(title: "Button title!", action: {}, style: .secondary)
+    MMButton(title: "Button title!",
+             style: .secondary, action: {})
 }

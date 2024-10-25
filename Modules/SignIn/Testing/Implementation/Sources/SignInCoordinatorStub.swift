@@ -30,4 +30,8 @@ public final class SignInCoordinatorStub: SignInCoordinatorProtocol {
     public func navigateToSignedInArea() {
         print("SignInCoordinatorStub: navigateToSignedInArea")
     }
+
+    public func navigateToAccountCreation() {
+        print("SignInCoordinatorStub: navigateToAccountCreation")
+    }
 }

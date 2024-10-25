@@ -34,6 +34,10 @@ public class SignInViewModel: ObservableObject {
         }
     }
 
+    func createAccount() {
+        coordinator?.navigateToAccountCreation()
+    }
+
     private func setLoading(to isLoading: Bool) {
         Task {
             await MainActor.run {

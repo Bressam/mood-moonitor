@@ -28,7 +28,7 @@ public struct SignInView: View {
                        spacing: SpacingTokens.xxlarge.constant) {
                     appLogo
                     inputFields
-                    signInButton
+                    buttons
                 }.padding([.leading, .trailing],
                           SpacingTokens.large.constant)
             }
@@ -76,12 +76,17 @@ public struct SignInView: View {
         }
     }
 
-    private var signInButton: some View {
-        MMButton(title: "Login") {
-            Task {
-                await viewModel.signIn(with: .init(username: email,
-                                                   password: password))
+    private var buttons: some View {
+        VStack(spacing: SpacingTokens.medium.constant) {
+            MMButton(title: "Login") {
+                Task {
+                    await viewModel.signIn(with: .init(username: email,
+                                                       password: password))
+                }
             }
+            MMButton(title: "Create account",
+                     style: .secondary,
+                     action: viewModel.createAccount)
         }
     }
 

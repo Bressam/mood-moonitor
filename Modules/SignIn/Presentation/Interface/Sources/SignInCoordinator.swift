@@ -12,5 +12,6 @@ public protocol SignInCoordinatorProtocol: CoordinatorProtocol {
 
     func navigateToForgotPassword()
     func navigateToSignIn()
+    func navigateToAccountCreation()
     func navigateToSignedInArea()
 }
