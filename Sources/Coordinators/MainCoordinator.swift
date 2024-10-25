@@ -10,11 +10,41 @@ import UIKit
 import SwiftUI
 import CoordinatorInterface
 
+// SignIn Feature
+import SignInFeatureInterface
+
+
 class MainCoordinator: CoordinatorProtocol {
-    let navigationController: UINavigationController = .init()
+    // MARK: - Properties
+    let navigationController: MMNavigationController = .init()
+    lazy var signInCoordinator: SignInCoordinatorProtocol = {
+        SignInCoordinatorAssembly.assemble(signedInCoordinatorHandler: self)
+    }()
     
     func start() {
-        let vc = UIHostingController(rootView: MainView())
-        navigationController.pushViewController(vc, animated: false)
+        navigateToSignIn()
+    }
+    
+    func navigateToSignIn() {
+        // Setup new flow presentation style
+        navigationController.present(signInCoordinator.navigationController, animated: false)
+
+        // Starts new flow
+        signInCoordinator.start()
+    }
+
+    func navigateToSignedInArea() {
+        print("Signed In!")
+    }
+}
+
+extension MainCoordinator: SignedInCoordinatorHandlerProtocol {
+    func handleSignedIn() {
+        Task {
+            await MainActor.run { [weak self] in
+                self?.signInCoordinator.dismiss()
+                self?.navigateToSignedInArea()
+            }
+        }
     }
 }
