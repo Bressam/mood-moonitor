@@ -21,13 +21,17 @@ public struct SignInView: View {
     public var body: some View {
         ZStack {
             gradientBackground
-            VStack(alignment: .center,
-                   spacing: SpacingTokens.xxlarge.constant) {
-                appLogo
-                inputFields
-                signInButton
-            }.padding([.leading, .trailing],
-                      SpacingTokens.large.constant)
+            if viewModel.isloading {
+                LoadingIndicatorView()
+            } else {
+                VStack(alignment: .center,
+                       spacing: SpacingTokens.xxlarge.constant) {
+                    appLogo
+                    inputFields
+                    signInButton
+                }.padding([.leading, .trailing],
+                          SpacingTokens.large.constant)
+            }
         }
     }
 
