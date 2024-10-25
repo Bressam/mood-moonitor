@@ -183,7 +183,7 @@ extension Project {
             ),
             targets: moduleTargets,
             schemes: [mainScheme],
-            resourceSynthesizers: [.assets()]
+            resourceSynthesizers: [.assets(), .files(extensions: ["json"])]
         )
     }
 }
