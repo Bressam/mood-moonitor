@@ -9,9 +9,9 @@
 import RegisterMoodDomainInterface
 
 public class RegisterMoodEntryUseCase: RegisterMoodEntryUseCaseProtocol {
-    private let repository: RegisterMoodRepositoryProtocol
+    private let repository: MoodRepositoryProtocol
 
-    public init(repository: RegisterMoodRepositoryProtocol) {
+    public init(repository: MoodRepositoryProtocol) {
         self.repository = repository
     }
 
