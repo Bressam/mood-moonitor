@@ -23,6 +23,7 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
     }
 
     public func start() {
+        navigationController.navigationBar.prefersLargeTitles = true
         navigateToMoodRegistry()
     }
 

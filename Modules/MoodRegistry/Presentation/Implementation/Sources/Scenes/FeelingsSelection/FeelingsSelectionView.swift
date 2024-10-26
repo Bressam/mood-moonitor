@@ -40,7 +40,7 @@ struct SelectableGridView: View {
 
             Button(action: {
                 onContinue(Array(selectedItems))
-            }) {
+            }, label: {
                 Text("Continue")
                     .font(.headline)
                     .foregroundColor(.white)
@@ -49,7 +49,7 @@ struct SelectableGridView: View {
                     .background(Color.green)
                     .cornerRadius(10)
                     .padding(.horizontal)
-            }
+            })
         }
     }
 
