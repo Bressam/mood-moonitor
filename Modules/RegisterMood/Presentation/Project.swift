@@ -12,6 +12,8 @@ let project = Project.module(
                  path: "../../../Modules/DesignSystem/Components")
     ],
     interfaceDependencies: [
+        .project(target: "CoordinatorInterface",
+                 path: "../../../Modules/CoordinatorModule/Coordinator"),
         .project(target: "RegisterMoodDomainInterface", path: "../Domain"),
         .project(target: "RegisterMoodDataInterface", path: "../Data")
     ],
