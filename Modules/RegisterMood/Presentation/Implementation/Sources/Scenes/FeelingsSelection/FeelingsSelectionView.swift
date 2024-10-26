@@ -36,23 +36,29 @@ struct FeelingsSelectionView: View {
 
     private var feelingsListView: some View {
         ScrollView {
-            LazyVGrid(columns: [.init(.adaptive(minimum: 80, maximum: .infinity))],
-                      spacing: 20) {
-                ForEach(viewModel.feelings, id: \.self) { feeling in
-                    Text(feeling.name)
-                        .padding()
-                        .frame(minWidth: 80)
-                        .background(viewModel.selectedFeelings.contains(feeling) ? Color.blue : Color.gray)
-                        .foregroundColor(.white)
-                        .clipShape(Capsule())
-                        .lineLimit(1) // Prevents multi-line text
-                        .fixedSize(horizontal: true, vertical: false) // Prevents text compression
-                        .onTapGesture {
-                            viewModel.toggleSelection(for: feeling)
-                        }
-                }
-            }
+            FlowLayout(mode: .scrollable,
+                       items: viewModel.feelings,
+                       itemSpacing: 8,
+                       viewMapping: { feeling in
+                Text(feeling.name)
+                    .padding(.horizontal, SpacingTokens.small.constant)
+                    .frame(minWidth: 80, minHeight: 40)
+                    .background(itemColor(isSelected: viewModel.checkSelected(feeling: feeling)))
+                    .foregroundColor(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: RadiusTokens.large.constant))
+                    .onTapGesture {
+                        viewModel.toggleSelection(for: feeling)
+                    }
+            })
             .padding()
+        }
+    }
+
+    private func itemColor(isSelected: Bool) -> Color {
+        if isSelected {
+            DesignSystemAsset.primaryColor.swiftUIColor
+        } else {
+            DesignSystemAsset.secondaryColor.swiftUIColor.opacity(0.6)
         }
     }
 }

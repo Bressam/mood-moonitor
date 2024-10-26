@@ -9,11 +9,15 @@
 #if DEBUG
 import RegisterMoodTesting
 
+// temp
+import RegisterMoodData
+import RegisterMoodDomain
+
 extension FeelingsSelectionViewModel {
     @MainActor
     static var preview: FeelingsSelectionViewModel {
         return .init(coordinator: RegisterMoodCoordinatorStub(),
-                     retrieveFeelingsUseCase: RetrieveFeelingsUseCaseStub())
+                     retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCase(repository: FeelingsRepository()))
     }
 }
 #endif

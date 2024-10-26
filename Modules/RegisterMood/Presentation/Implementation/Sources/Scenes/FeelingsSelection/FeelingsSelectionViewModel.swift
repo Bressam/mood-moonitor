@@ -41,6 +41,10 @@ public class FeelingsSelectionViewModel: ObservableObject {
         }
     }
 
+    func checkSelected(feeling: Feeling) -> Bool {
+        selectedFeelings.contains(feeling)
+    }
+
     // MARK: - Navigation
     public func handleFinishSelectedFeelings() {
         coordinator?.navigateToAddDetails()
