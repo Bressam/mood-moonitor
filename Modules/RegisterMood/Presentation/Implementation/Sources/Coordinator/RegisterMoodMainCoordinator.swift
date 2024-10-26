@@ -15,11 +15,17 @@ import RegisterMoodDomainInterface
 public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
     public let navigationController: MMNavigationController
     private let registerMoodUseCase: RegisterMoodEntryUseCaseProtocol
+    private let retrieveMoodUseCase: RetrieveAvailableMoodsUseCaseProtocol
+    private let retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol
 
     public init(navigationController: MMNavigationController = .init(),
-                registerMoodUseCase: RegisterMoodEntryUseCaseProtocol) {
+                registerMoodUseCase: RegisterMoodEntryUseCaseProtocol,
+                retrieveMoodUseCase: RetrieveAvailableMoodsUseCaseProtocol,
+                retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol) {
         self.navigationController = navigationController
         self.registerMoodUseCase = registerMoodUseCase
+        self.retrieveMoodUseCase = retrieveMoodUseCase
+        self.retrieveFeelingsUseCase = retrieveFeelingsUseCase
     }
 
     public func start() {
@@ -32,9 +38,9 @@ public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
     }
 
     public func navigateToFeelings() {
-        let moodRegistryVC = UIHostingController(rootView: FeelingsSelectionView(items: [], onContinue: { feelings in
-            print("Coordinator received feelings: \(feelings)")
-        }))
+        let viewModel = FeelingsSelectionViewModel(coordinator: self,
+                                                   retrieveFeelingsUseCase: retrieveFeelingsUseCase)
+        let moodRegistryVC = UIHostingController(rootView: FeelingsSelectionView(viewModel: viewModel))
         navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 
