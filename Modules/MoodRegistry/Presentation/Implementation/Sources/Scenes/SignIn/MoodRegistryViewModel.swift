@@ -23,7 +23,7 @@ public class MoodRegistryViewModel: ObservableObject {
         self.registerMoodEntryUseCase = registerMoodEntryUseCase
     }
 
-    private func handleAddMoodEntry() {
-        print("handleAddMoodEntry!")
+    public func handleAddMoodEntry() {
+        coordinator?.navigateToRegisterMood()
     }
 }

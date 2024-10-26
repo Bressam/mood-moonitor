@@ -18,6 +18,9 @@ public struct MoodRegistryView: View {
 
     public var body: some View {
         Text("MoodRegistryView")
+        MMButton(title: "Register new mood") {
+            viewModel.handleAddMoodEntry()
+        }
     }
 }
 

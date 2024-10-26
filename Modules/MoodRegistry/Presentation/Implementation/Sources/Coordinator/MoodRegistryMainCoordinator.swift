@@ -34,7 +34,10 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
     }
 
     public func navigateToRegisterMood() {
-        // TODO: Implement forgot password flow
+        let viewModel = MoodRegistryViewModel(coordinator: self,
+                                              registerMoodEntryUseCase: registerMoodUseCase)
+        let moodRegistryVC = UIHostingController(rootView: MoodRegistryView(moodRegistryViewModel: viewModel))
+        navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 
     public func navigateToRegisterFeelings() {
