@@ -44,7 +44,7 @@ public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
         navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 
-    public func navigateToAddDetails() {
+    public func navigateToAddDetails(carrying: [Feeling]) {
         print("navigateToAddDetails")
     }
 }

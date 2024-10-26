@@ -47,6 +47,6 @@ public class FeelingsSelectionViewModel: ObservableObject {
 
     // MARK: - Navigation
     public func handleFinishSelectedFeelings() {
-        coordinator?.navigateToAddDetails()
+        coordinator?.navigateToAddDetails(carrying: Array(selectedFeelings))
     }
 }

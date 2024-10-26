@@ -38,11 +38,11 @@ struct FeelingsSelectionView: View {
         ScrollView {
             FlowLayout(mode: .scrollable,
                        items: viewModel.feelings,
-                       itemSpacing: 8,
+                       itemSpacing: SpacingTokens.small.constant,
                        viewMapping: { feeling in
                 Text(feeling.name)
                     .padding(.horizontal, SpacingTokens.small.constant)
-                    .frame(minWidth: 80, minHeight: 40)
+                    .frame(minWidth: 90, minHeight: 36)
                     .background(itemColor(isSelected: viewModel.checkSelected(feeling: feeling)))
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: RadiusTokens.large.constant))

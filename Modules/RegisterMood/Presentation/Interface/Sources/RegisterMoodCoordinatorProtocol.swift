@@ -6,9 +6,10 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 import CoordinatorInterface
+import RegisterMoodDomainInterface
 
 public protocol RegisterMoodCoordinatorProtocol: CoordinatorProtocol {
     func navigateToMood()
     func navigateToFeelings()
-    func navigateToAddDetails()
+    func navigateToAddDetails(carrying: [Feeling])
 }
