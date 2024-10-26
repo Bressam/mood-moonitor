@@ -40,10 +40,11 @@ public enum ButtonSizeTokens {
 }
 
 public enum RadiusTokens {
-    case small, xsmall, regular
+    case small, xsmall, regular, large
 
     public var constant: CGFloat {
         switch self {
+        case .large: return 16
         case .regular: return 12
         case .small: return 8
         case .xsmall: return 4
