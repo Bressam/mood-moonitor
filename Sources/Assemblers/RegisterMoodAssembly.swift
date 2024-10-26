@@ -14,7 +14,10 @@ import RegisterMoodData
 class RegisterMoodAssembly {
     @MainActor
     static func assemble() -> RegisterMoodCoordinatorProtocol {
-        let repository = RegisterMoodRepository()
-        return RegisterMoodMainCoordinator(registerMoodUseCase: RegisterMoodEntryUseCase(repository: repository))
+        let moodRepository = MoodRepository()
+        let feelingsRepostory = FeelingsRepository()
+        return RegisterMoodMainCoordinator(registerMoodUseCase: RegisterMoodEntryUseCase(repository: moodRepository),
+                                           retrieveMoodUseCase: RetrieveAvailableMoodsUseCase(repository: moodRepository),
+                                           retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCase(repository: feelingsRepostory))
     }
 }
