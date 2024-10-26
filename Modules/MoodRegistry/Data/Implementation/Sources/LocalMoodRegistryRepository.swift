@@ -11,7 +11,7 @@ import MoodRegistryDomainInterface
 public class LocalMoodRegistryRepository: MoodRegistryRepositoryProtocol {
     public init() {}
 
-    public func getMoodRegistry() async throws -> MoodRegistryDomainInterface.MoodRegistryEntry {
-        return .init(moodLevel: "", feelings: [], moodDescription: "")
+    public func getMoodRegistry() async throws -> [MoodRegistryDomainInterface.MoodRegistryEntry] {
+        return []
     }
 }

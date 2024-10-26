@@ -1,5 +1,5 @@
 //
-//  RegisterMoodEntryUseCaseStub.swift
+//  RetrieveMoodRegistryUseCaseStub.swift
 //  MoodRegistryTesting
 //
 //  Created by Giovanne Bressam on 21/10/24.
@@ -9,16 +9,16 @@
 import MoodRegistryFeatureInterface
 import MoodRegistryDomainInterface
 
-public final class RegisterMoodEntryUseCaseStub: RegisterMoodEntryUseCaseProtocol {
+public final class RetrieveMoodRegistryUseCaseStub: RetrieveMoodRegistryUseCaseProtocol {
     var shouldThrowError: Bool
 
     public init(shouldThrowError: Bool = false) {
         self.shouldThrowError = shouldThrowError
     }
 
-    public func execute(with moodEntry: MoodRegistryEntry) async throws -> MoodRegistryEntry {
+    public func execute() async throws -> [MoodRegistryEntry] {
         guard !shouldThrowError else { throw MoodEntryError.failedToRetriveRegistry }
-        return .init(moodLevel: "", feelings: [], moodDescription: "")
+        return []
     }
 }
 

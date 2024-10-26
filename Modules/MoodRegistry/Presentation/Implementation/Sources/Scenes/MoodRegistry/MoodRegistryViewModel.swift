@@ -12,15 +12,15 @@ import MoodRegistryDomainInterface
 
 public class MoodRegistryViewModel: ObservableObject {
     private weak var coordinator: MoodRegistryCoordinatorProtocol?
-    private var registerMoodEntryUseCase: RegisterMoodEntryUseCaseProtocol
+    private let retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol
 
     @MainActor
     @Published var isloading: Bool = false
 
     public init(coordinator: MoodRegistryCoordinatorProtocol,
-                registerMoodEntryUseCase: RegisterMoodEntryUseCaseProtocol) {
+                retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol) {
         self.coordinator = coordinator
-        self.registerMoodEntryUseCase = registerMoodEntryUseCase
+        self.retrieveMoodRegistryUseCase = retrieveMoodRegistryUseCase
     }
 
     public func handleAddMoodEntry() {

@@ -18,7 +18,7 @@ public class MoodRegistryRepository: MoodRegistryRepositoryProtocol {
         self.remoteMoodRegistryRepository = remoteAuthDataRepository
     }
 
-    public func getMoodRegistry() async throws -> MoodRegistryDomainInterface.MoodRegistryEntry {
+    public func getMoodRegistry() async throws -> [MoodRegistryDomainInterface.MoodRegistryEntry] {
         do {
             return try await remoteMoodRegistryRepository.getMoodRegistry()
         } catch {

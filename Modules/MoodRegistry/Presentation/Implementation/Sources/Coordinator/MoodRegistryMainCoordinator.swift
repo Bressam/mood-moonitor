@@ -12,14 +12,20 @@ import CoordinatorInterface
 import MoodRegistryFeatureInterface
 import MoodRegistryDomainInterface
 
+// Other Features dependencies
+import RegisterMoodFeatureInterface
+
 public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
     public let navigationController: MMNavigationController
-    private let registerMoodUseCase: RegisterMoodEntryUseCaseProtocol
+    private let retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol
+    private let registerMoodCoordinator: RegisterMoodCoordinatorProtocol
 
     public init(navigationController: MMNavigationController = .init(),
-                registerMoodUseCase: RegisterMoodEntryUseCaseProtocol) {
+                retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol,
+                registerMoodCoordinator: RegisterMoodCoordinatorProtocol) {
         self.navigationController = navigationController
-        self.registerMoodUseCase = registerMoodUseCase
+        self.retrieveMoodRegistryUseCase = retrieveMoodRegistryUseCase
+        self.registerMoodCoordinator = registerMoodCoordinator
     }
 
     public func start() {
@@ -29,19 +35,13 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
 
     public func navigateToMoodRegistry() {
         let viewModel = MoodRegistryViewModel(coordinator: self,
-                                              registerMoodEntryUseCase: registerMoodUseCase)
+                                              retrieveMoodRegistryUseCase: retrieveMoodRegistryUseCase)
         let moodRegistryVC = UIHostingController(rootView: MoodRegistryView(moodRegistryViewModel: viewModel))
         navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 
     public func navigateToRegisterMood() {
-        let viewModel = MoodRegistryViewModel(coordinator: self,
-                                              registerMoodEntryUseCase: registerMoodUseCase)
-        let moodRegistryVC = UIHostingController(rootView: MoodRegistryView(moodRegistryViewModel: viewModel))
-        navigationController.pushViewController(moodRegistryVC, animated: true)
-    }
-
-    public func navigateToRegisterFeelings() {
-        // TODO: Implement create account flow
+        registerMoodCoordinator.navigationController.modalPresentationStyle = .pageSheet
+        startChildFlow(with: registerMoodCoordinator)
     }
 }

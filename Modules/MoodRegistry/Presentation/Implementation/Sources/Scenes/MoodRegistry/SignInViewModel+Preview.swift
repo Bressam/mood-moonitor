@@ -13,7 +13,7 @@ extension MoodRegistryViewModel {
     @MainActor
     static var preview: MoodRegistryViewModel {
         return .init(coordinator: MoodRegistryCoordinatorStub(),
-                     registerMoodEntryUseCase: RegisterMoodEntryUseCaseStub())
+                     retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseStub())
     }
 }
 #endif

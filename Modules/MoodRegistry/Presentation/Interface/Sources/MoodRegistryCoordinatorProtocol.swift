@@ -9,6 +9,5 @@ import CoordinatorInterface
 
 public protocol MoodRegistryCoordinatorProtocol: CoordinatorProtocol {
     func navigateToRegisterMood()
-    func navigateToRegisterFeelings()
     func navigateToMoodRegistry()
 }

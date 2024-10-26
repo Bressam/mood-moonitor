@@ -7,5 +7,5 @@
 //
 
 public protocol MoodRegistryRepositoryProtocol: AnyObject {
-    func getMoodRegistry() async throws -> MoodRegistryEntry
+    func getMoodRegistry() async throws -> [MoodRegistryEntry]
 }

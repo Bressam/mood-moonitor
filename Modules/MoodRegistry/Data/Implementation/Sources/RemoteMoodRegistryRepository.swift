@@ -11,8 +11,8 @@ import MoodRegistryDomainInterface
 public class RemoteMoodRegistryRepository: MoodRegistryRepositoryProtocol {
     public init() {}
 
-    public func getMoodRegistry() async throws -> MoodRegistryDomainInterface.MoodRegistryEntry {
+    public func getMoodRegistry() async throws -> [MoodRegistryDomainInterface.MoodRegistryEntry] {
         try await Task.sleep(for: .seconds(2))
-        return .init(moodLevel: "", feelings: [], moodDescription: "")
+        return []
     }
 }
