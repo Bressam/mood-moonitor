@@ -25,9 +25,8 @@ public final class MoodRegistryCoordinatorStub: MoodRegistryCoordinatorProtocol 
     public func navigateToRegisterMood() {
         print("MoodRegistryCoordinatorStub: navigateToRegisterMood")
     }
-    
+
     public func navigateToRegisterFeelings() {
         print("MoodRegistryCoordinatorStub: navigateToRegisterFeelings")
     }
-    
 }
