@@ -21,6 +21,7 @@ public struct MoodRegistryView: View {
         MMButton(title: "Register new mood") {
             viewModel.handleAddMoodEntry()
         }
+        .navigationTitle("Custom Title") // Set the title here
     }
 }
 
