@@ -12,7 +12,8 @@ import CoordinatorInterface
 
 // SignIn Feature
 import SignInFeatureInterface
-
+// RegisterEntry Feature
+import MoodRegistryFeatureInterface
 
 class MainCoordinator: CoordinatorProtocol {
     // MARK: - Properties
@@ -20,7 +21,11 @@ class MainCoordinator: CoordinatorProtocol {
     lazy var signInCoordinator: SignInCoordinatorProtocol = {
         SignInCoordinatorAssembly.assemble(signedInCoordinatorHandler: self)
     }()
-    
+
+    lazy var moodRegistryCoordinator: MoodRegistryCoordinatorProtocol = {
+        MoodRegistryCoordinatorAssembly.assemble()
+    }()
+
     func start() {
         navigateToSignIn()
     }
@@ -30,7 +35,7 @@ class MainCoordinator: CoordinatorProtocol {
     }
 
     func navigateToSignedInArea() {
-        print("Signed In!")
+        startChildFlow(with: moodRegistryCoordinator)
     }
 }
 
