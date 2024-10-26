@@ -14,18 +14,27 @@ import CoordinatorInterface
 import SignInFeatureInterface
 // RegisterEntry Feature
 import MoodRegistryFeatureInterface
+// MoodRegister Feature
+import RegisterMoodFeatureInterface
 
 class MainCoordinator: CoordinatorProtocol {
     // MARK: - Properties
     let navigationController: MMNavigationController = .init()
+    
+    // MARK: - Features Assemblers
     lazy var signInCoordinator: SignInCoordinatorProtocol = {
         SignInCoordinatorAssembly.assemble(signedInCoordinatorHandler: self)
     }()
 
     lazy var moodRegistryCoordinator: MoodRegistryCoordinatorProtocol = {
-        MoodRegistryCoordinatorAssembly.assemble()
+        MoodRegistryCoordinatorAssembly.assemble(registerMoodCoordinator: registerMoodCoordinator)
     }()
 
+    lazy var registerMoodCoordinator: RegisterMoodCoordinatorProtocol = {
+        RegisterMoodAssembly.assemble()
+    }()
+
+    // MARK: - Lifecycle and Flow
     func start() {
         navigateToSignIn()
     }
@@ -39,6 +48,7 @@ class MainCoordinator: CoordinatorProtocol {
     }
 }
 
+// MARK: - SignIn feature callback
 extension MainCoordinator: SignedInCoordinatorHandlerProtocol {
     func handleSignedIn() {
         Task {
