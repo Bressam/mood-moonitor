@@ -14,7 +14,11 @@ let project = Project.project(
         .project(target: "SignInFeature",
                  path: "./Modules/SignIn/Presentation"),
         .project(target: "SignInFeatureInterface",
-                 path: "./Modules/SignIn/Presentation")
+                 path: "./Modules/SignIn/Presentation"),
+        .project(target: "MoodRegistryFeature",
+                 path: "./Modules/MoodRegistry/Presentation"),
+        .project(target: "MoodRegistryFeatureInterface",
+                 path: "./Modules/MoodRegistry/Presentation")
     ],
     disableBundleAccessors: false,
     disableSynthesizedResourceAccessors: false

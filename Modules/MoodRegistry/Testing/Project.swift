@@ -2,14 +2,14 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.module(
-    name: "SignInTesting",
+    name: "MoodRegistryTesting",
     hasInterface: false,
     hasTests: false,
     bundleIdPrefix: "dev.bressam.mood-moonitor",
     implementationDependencies: [
-        .project(target: "SignInFeatureInterface", path: "../Presentation"),
-        .project(target: "SignInDataInterface", path: "../Data"),
-        .project(target: "SignInDomainInterface", path: "../Domain")
+        .project(target: "MoodRegistryFeatureInterface", path: "../Presentation"),
+        .project(target: "MoodRegistryDataInterface", path: "../Data"),
+        .project(target: "MoodRegistryDomainInterface", path: "../Domain")
     ],
     disableBundleAccessors: true,
     disableSynthesizedResourceAccessors: false
