@@ -12,21 +12,21 @@ import UIKit
 public protocol CoordinatorProtocol: AnyObject {
     var navigationController: MMNavigationController { get }
     func start()
-    func dismiss()
+    func dismiss(animated: Bool)
     func startChildFlow(with coordinator: CoordinatorProtocol)
 }
 
 public extension CoordinatorProtocol {
-    func dismiss() {
-        navigationController.dismiss(animated: true, completion: { [weak self] in
+    func dismiss(animated: Bool = true) {
+        navigationController.dismiss(animated: animated, completion: { [weak self] in
             self?.navigationController.viewControllers.removeAll()
         })
     }
-    
+
     func startChildFlow(with coordinator: CoordinatorProtocol) {
         // Setup new flow presentation style
         navigationController.present(coordinator.navigationController, animated: false)
-        
+
         // Starts new flow
         coordinator.start()
     }

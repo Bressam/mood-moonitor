@@ -43,7 +43,7 @@ extension MainCoordinator: SignedInCoordinatorHandlerProtocol {
     func handleSignedIn() {
         Task {
             await MainActor.run { [weak self] in
-                self?.signInCoordinator.dismiss()
+                self?.signInCoordinator.dismiss(animated: false)
                 self?.navigateToSignedInArea()
             }
         }
