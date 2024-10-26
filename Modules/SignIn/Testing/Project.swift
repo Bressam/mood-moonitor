@@ -7,6 +7,7 @@ let project = Project.module(
     hasTests: false,
     bundleIdPrefix: "dev.bressam.mood-moonitor",
     implementationDependencies: [
+        .project(target: "SignInFeatureInterface", path: "../Presentation"),
         .project(target: "SignInDataInterface", path: "../Data"),
         .project(target: "SignInDomainInterface", path: "../Domain")
     ],
