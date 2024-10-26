@@ -14,7 +14,7 @@ struct FeelingsSelectionView: View {
     @State private var selectedItems: Set<String> = []
 
     private let columns = [
-        GridItem(.adaptive(minimum: 80, maximum: .infinity)) // Adjust cell width as needed
+        GridItem(.adaptive(minimum: 80, maximum: .infinity))
     ]
 
     var body: some View {
@@ -24,7 +24,7 @@ struct FeelingsSelectionView: View {
                     ForEach(items, id: \.self) { item in
                         Text(item)
                             .padding()
-                            .frame(minWidth: 80) // Minimum width for consistent sizing
+                            .frame(minWidth: 80)
                             .background(selectedItems.contains(item) ? Color.blue : Color.gray)
                             .foregroundColor(.white)
                             .clipShape(Capsule())
@@ -66,7 +66,6 @@ struct ContentView: View {
     var body: some View {
         FeelingsSelectionView(items: ["Apple", "Banana", "Cherry", "Date", "Elderberry"]) { selectedItems in
             print("Selected items: \(selectedItems)")
-            // Navigate to the next view or handle selected items as needed
         }
     }
 }
