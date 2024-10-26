@@ -27,7 +27,10 @@ public class FeelingsSelectionViewModel: ObservableObject {
 
     // MARK: - Data Related
     func fetchAvailableFeelings() async {
-        feelings = (try? await retrieveFeelingsUseCase.execute()) ?? []
+        let fetchedFeelings = (try? await retrieveFeelingsUseCase.execute()) ?? []
+        await MainActor.run {
+            feelings = fetchedFeelings
+        }
     }
 
     func toggleSelection(for item: Feeling) {
