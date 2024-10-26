@@ -22,6 +22,8 @@ struct FeelingsSelectionView: View {
     // MARK: - Views
     var body: some View {
         VStack {
+            currentMoodView
+            descriptionView
             feelingsListView
             MMButton(title: "Continue") {
                 viewModel.handleFinishSelectedFeelings()
@@ -32,6 +34,27 @@ struct FeelingsSelectionView: View {
                 await viewModel.fetchAvailableFeelings()
             }
         })
+    }
+
+    private var currentMoodView: some View {
+        VStack(spacing: SpacingTokens.medium.constant) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.gray.opacity(0.5))
+                    .frame(height: 300)
+                Text("Your mood here")
+            }
+        }
+        .padding([.top], SpacingTokens.large.constant)
+    }
+
+    private var descriptionView: some View {
+        VStack(alignment: .leading) {
+            Text("Select your feelings")
+                .font(.appBodyFont)
+                .padding([.top, .leading], SpacingTokens.medium.constant)
+            Divider()
+        }
     }
 
     private var feelingsListView: some View {
@@ -71,6 +94,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NavigationStack {
+            ContentView()
+        }
     }
 }

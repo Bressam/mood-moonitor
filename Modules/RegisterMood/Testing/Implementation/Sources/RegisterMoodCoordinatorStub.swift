@@ -7,6 +7,7 @@
 //
 
 import RegisterMoodFeatureInterface
+import RegisterMoodDomainInterface
 import CoordinatorInterface
 
 public final class RegisterMoodCoordinatorStub: RegisterMoodCoordinatorProtocol {
@@ -26,7 +27,7 @@ public final class RegisterMoodCoordinatorStub: RegisterMoodCoordinatorProtocol 
         print("RegisterMoodCoordinatorStub: navigateToFeelings")
     }
 
-    public func navigateToAddDetails() {
+    public func navigateToAddDetails(carrying: [Feeling]) {
         print("RegisterMoodCoordinatorStub: navigateToAddDetails")
     }
 }
