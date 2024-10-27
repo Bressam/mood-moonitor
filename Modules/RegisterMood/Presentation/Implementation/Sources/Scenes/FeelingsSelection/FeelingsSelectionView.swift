@@ -86,16 +86,6 @@ struct FeelingsSelectionView: View {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-        FeelingsSelectionView(viewModel: .preview)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ContentView()
-        }
-    }
+#Preview {
+    FeelingsSelectionView(viewModel: .preview)
 }
