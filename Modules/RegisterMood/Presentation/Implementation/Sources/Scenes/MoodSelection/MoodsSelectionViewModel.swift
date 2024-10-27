@@ -40,7 +40,7 @@ public class MoodsSelectionViewModel: ObservableObject {
         currentMoodEntry.moodLevel = selectedMood
         coordinator?.navigateToFeelings(carrying: currentMoodEntry)
     }
-    
+
     @MainActor
     func dismiss() {
         coordinator?.dismiss(animated: true)
