@@ -44,7 +44,7 @@ class MainCoordinator: CoordinatorProtocol {
     }
 
     func navigateToSignedInArea() {
-        startChildFlow(with: moodRegistryCoordinator)
+        startChildFlow(with: moodRegistryCoordinator, animated: false)
     }
 }
 

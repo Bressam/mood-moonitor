@@ -38,8 +38,19 @@ public struct MoodRegistryView: View {
                 }
             })
         }
-        .navigationTitle("Welcome :)")
         .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Text("Welcome :)")
+                        .foregroundColor(DesignSystemAsset.primaryColor.swiftUIColor)
+                        .font(.appLargeTitleFont)
+                        .padding([.top], SpacingTokens.xxlarge.constant)
+                        .padding([.leading], SpacingTokens.large.constant)
+                    Spacer()
+                }.padding([.top], SpacingTokens.xxlarge.constant)
+            }
+        }
     }
 
     private var gradientBackground: some View {
@@ -47,7 +58,7 @@ public struct MoodRegistryView: View {
             gradient: Gradient(stops: [
                 Gradient.Stop(color: DesignSystemAsset.backgroundLightPink.swiftUIColor.opacity(0.6),
                               location: 0.24),
-                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor,
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor.opacity(0.6),
                               location: 0.76)
             ]),
             startPoint: .top,
@@ -62,6 +73,7 @@ public struct MoodRegistryView: View {
             HStack {
                 Text("Registry")
                     .font(.appTitleFont)
+                    .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                 Spacer()
             }
             List(viewModel.moodRegistry, id: \.date) { moodRegistryEntry in
@@ -88,6 +100,7 @@ public struct MoodRegistryView: View {
             HStack {
                 Text("Today, \(dateFormatter.string(from: .init()))")
                     .font(.appTitleFont)
+                    .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                 Spacer()
                 Button(action: {
                     viewModel.handleAddMoodEntry()
@@ -95,8 +108,8 @@ public struct MoodRegistryView: View {
                     Image(systemName: "plus")
                     Text("Log")
                 })
-                .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
-                .tint(DesignSystemAsset.secondaryActionColor.swiftUIColor)
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
+                .tint(DesignSystemAsset.primaryColor.swiftUIColor)
                 .buttonStyle(.bordered)
             }
             todayEntryMoodView
@@ -111,6 +124,7 @@ public struct MoodRegistryView: View {
                                  style: .playOnce,
                                  hasShadow: true,
                                  fillColor: DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+                .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
             } else {
                 RoundedRectangle(cornerRadius: RadiusTokens.regular.constant)
                     .fill(DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
