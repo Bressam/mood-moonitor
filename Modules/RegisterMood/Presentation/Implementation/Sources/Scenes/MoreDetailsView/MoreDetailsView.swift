@@ -32,14 +32,41 @@ struct MoreDetailsView: View {
     }
 
     private var contentView: some View {
-        VStack {
-            Text("MoreDetailsView")
+        VStack(spacing: SpacingTokens.large.constant) {
+            currentMoodView
+            moodDescriptionTextField
+            Spacer()
             MMButton(title: "Send") {
                 Task {
                     await viewModel.registerMoodEntry()
                 }
             }
         }
+    }
+
+    private var moodDescriptionTextField: some View {
+        VStack(spacing: SpacingTokens.small.constant) {
+            HStack {
+                Text("Enter your mood")
+                    .font(.appBodyFont.bold())
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                Spacer()
+            }
+            TextEditor(text: $viewModel.moodDetailsEntry)
+                .foregroundStyle(.purple)
+                .padding(6)
+                .background(
+                    RoundedRectangle(cornerRadius: RadiusTokens.regular.constant)
+                        .fill(.white)
+                )
+        }.padding([.leading, .trailing])
+    }
+
+    private var currentMoodView: some View {
+        MoodGradientView(currentMood: .constant(viewModel.currentMoodEntry.moodLevel),
+                         style: .playOnce,
+                         hasShadow: false)
+        .padding([.top], SpacingTokens.large.constant)
     }
 
     private var gradientBackground: some View {
