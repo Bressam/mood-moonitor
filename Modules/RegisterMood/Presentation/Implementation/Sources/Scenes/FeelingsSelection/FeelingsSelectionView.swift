@@ -37,15 +37,10 @@ struct FeelingsSelectionView: View {
     }
 
     private var currentMoodView: some View {
-        VStack(spacing: SpacingTokens.medium.constant) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.gray.opacity(0.5))
-                    .frame(height: 300)
-                Text("Your mood here")
-            }
-        }
-        .padding([.top], SpacingTokens.large.constant)
+        MoodGradientView(currentMood: .constant(viewModel.currentMoodEntry.moodLevel),
+                         style: .playOnce,
+                         hasShadow: false)
+            .padding([.top], SpacingTokens.large.constant)
     }
 
     private var descriptionView: some View {

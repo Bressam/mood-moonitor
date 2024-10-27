@@ -15,7 +15,7 @@ public class FeelingsSelectionViewModel: ObservableObject {
     // MARK: - Properties
     private weak var coordinator: RegisterMoodCoordinatorProtocol?
     private let retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol
-    private var currentMoodEntry: MoodEntry
+    private(set) var currentMoodEntry: MoodEntry
     @Published var feelings: [Feeling] = []
     @Published var selectedFeelings: Set<Feeling> = []
 
