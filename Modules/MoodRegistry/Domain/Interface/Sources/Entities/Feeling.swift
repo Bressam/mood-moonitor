@@ -6,7 +6,7 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
-public struct Feeling: Hashable {
+public struct Feeling: Codable, Hashable {
     public let name: String
 
     public init(name: String) {

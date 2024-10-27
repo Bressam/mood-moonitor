@@ -6,7 +6,7 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
-public struct MoodEntry {
+public struct MoodEntry: Codable {
     public var moodLevel: Mood
     public var feelings: [Feeling]
     public var moodDescription: String
