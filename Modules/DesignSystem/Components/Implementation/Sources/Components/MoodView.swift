@@ -29,7 +29,6 @@ public struct MoodView: View {
             animation
             Text(currentMood.name)
                 .font(.appTitleFont)
-                .foregroundStyle(getColor(for: currentMood))
         }
     }
 
@@ -69,28 +68,19 @@ public struct MoodView: View {
         case .veryPleasant: return 1.3
         }
     }
-
-    private func getColor(for mood: Mood) -> Color {
-        switch mood {
-        case .veryUnpleasant: return .purple
-        case .unpleasant: return .cyan
-        case .neutral: return .yellow
-        case .pleasant: return .green.opacity(0.8)
-        case .veryPleasant: return .green
-        }
-    }
-
-    public func moodColor() -> Color {
-        return getColor(for: currentMood)
-    }
 }
 
 #Preview {
     List {
         MoodView(mood: .veryUnpleasant)
+            .listRowBackground(Color.black.opacity(0.7))
         MoodView(mood: .unpleasant)
+            .listRowBackground(Color.black.opacity(0.7))
         MoodView(mood: .neutral)
+            .listRowBackground(Color.black.opacity(0.7))
         MoodView(mood: .pleasant)
+            .listRowBackground(Color.black.opacity(0.7))
         MoodView(mood: .veryPleasant)
+            .listRowBackground(Color.black.opacity(0.7))
     }
 }
