@@ -40,7 +40,7 @@ class MainCoordinator: CoordinatorProtocol {
     }
     
     func navigateToSignIn() {
-        startChildFlow(with: signInCoordinator)
+        startChildFlow(with: signInCoordinator, animated: false)
     }
 
     func navigateToSignedInArea() {

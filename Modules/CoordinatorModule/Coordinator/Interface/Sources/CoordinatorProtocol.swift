@@ -13,19 +13,20 @@ public protocol CoordinatorProtocol: AnyObject {
     var navigationController: MMNavigationController { get }
     func start()
     func dismiss(animated: Bool)
-    func startChildFlow(with coordinator: CoordinatorProtocol)
+    func startChildFlow(with coordinator: CoordinatorProtocol, animated: Bool)
 }
 
 public extension CoordinatorProtocol {
     func dismiss(animated: Bool = true) {
-        navigationController.dismiss(animated: animated, completion: { [weak self] in
-            self?.navigationController.viewControllers.removeAll()
+        navigationController.dismiss(animated: animated, completion: {
+            self.navigationController.viewControllers.removeAll()
         })
     }
 
-    func startChildFlow(with coordinator: CoordinatorProtocol) {
+    func startChildFlow(with coordinator: CoordinatorProtocol,
+                        animated: Bool = true) {
         // Setup new flow presentation style
-        navigationController.present(coordinator.navigationController, animated: false)
+        navigationController.present(coordinator.navigationController, animated: animated)
 
         // Starts new flow
         coordinator.start()
