@@ -18,7 +18,7 @@ public final class RetrieveMoodsUseCaseStub: RetrieveAvailableMoodsUseCaseProtoc
 
     public func execute() async throws -> [Mood] {
         guard !shouldThrowError else { throw MoodRetrieveError.failedToRetriveMoods }
-        return []
+        return Mood.allCases
     }
 }
 

@@ -25,7 +25,7 @@ public struct MoodGradientView: View {
     public var body: some View {
         ZStack {
             backgroundRender
-            MoodView(mood: currentMood)
+            MoodView(mood: $currentMood)
         }
     }
 

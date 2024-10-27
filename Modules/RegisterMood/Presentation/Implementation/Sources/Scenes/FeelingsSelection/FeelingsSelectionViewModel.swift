@@ -15,14 +15,17 @@ public class FeelingsSelectionViewModel: ObservableObject {
     // MARK: - Properties
     private weak var coordinator: RegisterMoodCoordinatorProtocol?
     private let retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol
+    private var currentMoodEntry: MoodEntry
     @Published var feelings: [Feeling] = []
     @Published var selectedFeelings: Set<Feeling> = []
 
     // MARK: - Init
     public init(coordinator: RegisterMoodCoordinatorProtocol?,
-                retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol) {
+                retrieveFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol,
+                moodEntry: MoodEntry) {
         self.coordinator = coordinator
         self.retrieveFeelingsUseCase = retrieveFeelingsUseCase
+        self.currentMoodEntry = moodEntry
     }
 
     // MARK: - Data Related
@@ -47,6 +50,7 @@ public class FeelingsSelectionViewModel: ObservableObject {
 
     // MARK: - Navigation
     public func handleFinishSelectedFeelings() {
-        coordinator?.navigateToAddDetails(carrying: Array(selectedFeelings))
+        self.currentMoodEntry.feelings = Array(selectedFeelings)
+        coordinator?.navigateToAddDetails(carrying: currentMoodEntry)
     }
 }

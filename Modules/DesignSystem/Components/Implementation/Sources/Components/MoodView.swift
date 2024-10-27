@@ -15,12 +15,12 @@ public enum MoodViewStyle {
 }
 
 public struct MoodView: View {
-    @State var currentMood: Mood
+    @Binding var currentMood: Mood
     @State var style: MoodViewStyle
 
-    public init(mood: Mood,
+    public init(mood: Binding<Mood>,
                 style: MoodViewStyle = .loop) {
-        self.currentMood = mood
+        self._currentMood = mood
         self.style = style
     }
 
@@ -44,6 +44,7 @@ public struct MoodView: View {
         .if(style == .loop, transform: { lottieView in
             lottieView.looping()
         })
+        .id(currentMood.id)
         .scaleEffect(getScaleEffect(for: currentMood))
         .frame(width: 220, height: 220)
     }
@@ -72,15 +73,20 @@ public struct MoodView: View {
 
 #Preview {
     List {
-        MoodView(mood: .veryUnpleasant)
+        let veryUnpleasant: Binding<Mood> =  .constant(.veryUnpleasant)
+        let unpleasant: Binding<Mood> =  .constant(.unpleasant)
+        let neutral: Binding<Mood> =  .constant(.neutral)
+        let pleasant: Binding<Mood> =  .constant(.pleasant)
+        let veryPleasant: Binding<Mood> =  .constant(.veryPleasant)
+        MoodView(mood: veryUnpleasant)
             .listRowBackground(Color.black.opacity(0.7))
-        MoodView(mood: .unpleasant)
+        MoodView(mood: unpleasant)
             .listRowBackground(Color.black.opacity(0.7))
-        MoodView(mood: .neutral)
+        MoodView(mood: neutral)
             .listRowBackground(Color.black.opacity(0.7))
-        MoodView(mood: .pleasant)
+        MoodView(mood: pleasant)
             .listRowBackground(Color.black.opacity(0.7))
-        MoodView(mood: .veryPleasant)
+        MoodView(mood: veryPleasant)
             .listRowBackground(Color.black.opacity(0.7))
     }
 }

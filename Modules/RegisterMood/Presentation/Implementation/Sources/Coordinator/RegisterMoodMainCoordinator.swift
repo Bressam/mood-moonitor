@@ -33,18 +33,21 @@ public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
     }
 
     public func navigateToMood() {
-        print("navigateToMood")
-        navigateToFeelings()
+        let viewModel = MoodsSelectionViewModel(coordinator: self,
+                                                retrieveMoodsUseCase: retrieveMoodUseCase)
+        let moodRegistryVC = UIHostingController(rootView: MoodsSelectionView(viewModel: viewModel))
+        navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 
-    public func navigateToFeelings() {
+    public func navigateToFeelings(carrying moodEntry: MoodEntry) {
         let viewModel = FeelingsSelectionViewModel(coordinator: self,
-                                                   retrieveFeelingsUseCase: retrieveFeelingsUseCase)
+                                                   retrieveFeelingsUseCase: retrieveFeelingsUseCase,
+                                                   moodEntry: moodEntry)
         let moodRegistryVC = UIHostingController(rootView: FeelingsSelectionView(viewModel: viewModel))
         navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 
-    public func navigateToAddDetails(carrying: [Feeling]) {
+    public func navigateToAddDetails(carrying moodEntry: MoodEntry) {
         print("navigateToAddDetails")
     }
 }

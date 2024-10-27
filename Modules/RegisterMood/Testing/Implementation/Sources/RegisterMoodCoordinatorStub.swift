@@ -23,11 +23,11 @@ public final class RegisterMoodCoordinatorStub: RegisterMoodCoordinatorProtocol 
         print("RegisterMoodCoordinatorStub: navigateToMood")
     }
 
-    public func navigateToFeelings() {
+    public func navigateToFeelings(carrying: MoodEntry) {
         print("RegisterMoodCoordinatorStub: navigateToFeelings")
     }
 
-    public func navigateToAddDetails(carrying: [Feeling]) {
+    public func navigateToAddDetails(carrying: MoodEntry) {
         print("RegisterMoodCoordinatorStub: navigateToAddDetails")
     }
 }

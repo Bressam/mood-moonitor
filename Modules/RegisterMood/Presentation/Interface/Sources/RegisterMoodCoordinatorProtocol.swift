@@ -10,6 +10,6 @@ import RegisterMoodDomainInterface
 
 public protocol RegisterMoodCoordinatorProtocol: CoordinatorProtocol {
     func navigateToMood()
-    func navigateToFeelings()
-    func navigateToAddDetails(carrying: [Feeling])
+    func navigateToFeelings(carrying: MoodEntry)
+    func navigateToAddDetails(carrying: MoodEntry)
 }

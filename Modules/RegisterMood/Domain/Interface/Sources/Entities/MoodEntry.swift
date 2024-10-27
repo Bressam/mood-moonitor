@@ -7,11 +7,11 @@
 //
 
 public struct MoodEntry {
-    public let moodLevel: String
-    public let feelings: [String]
-    public let moodDescription: String
+    public var moodLevel: Mood
+    public var feelings: [Feeling]
+    public var moodDescription: String
 
-    public init (moodLevel: String, feelings: [String], moodDescription: String) {
+    public init (moodLevel: Mood, feelings: [Feeling], moodDescription: String) {
         self.moodLevel = moodLevel
         self.feelings = feelings
         self.moodDescription = moodDescription
