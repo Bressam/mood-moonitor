@@ -13,6 +13,14 @@ public class RemoteMoodRegistryRepository: MoodRegistryRepositoryProtocol {
 
     public func getMoodRegistry() async throws -> [MoodRegistryDomainInterface.MoodRegistryEntry] {
         try await Task.sleep(for: .seconds(2))
-        return []
+        throw(RemoteMoodRegistryRepositoryError.timeout)
     }
+
+    public func getTodayMoodRegistry() async throws -> MoodRegistryDomainInterface.MoodRegistryEntry? {
+        throw(RemoteMoodRegistryRepositoryError.timeout)
+    }
+}
+
+enum RemoteMoodRegistryRepositoryError: Error {
+    case timeout
 }

@@ -14,7 +14,8 @@ import RegisterMoodData
 class RegisterMoodAssembly {
     @MainActor
     static func assemble() -> RegisterMoodCoordinatorProtocol {
-        let moodRepository = MoodRepository()
+        let moodRepository = MoodRepository(localMoodRepository: LocalMoodRepository(),
+                                            remoteMoodRepository: RemoteMoodRepository())
         let feelingsRepostory = FeelingsRepository()
         return RegisterMoodMainCoordinator(registerMoodUseCase: RegisterMoodEntryUseCase(repository: moodRepository),
                                            retrieveMoodUseCase: RetrieveAvailableMoodsUseCase(repository: moodRepository),

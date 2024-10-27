@@ -35,6 +35,7 @@ class MoreDetailsViewModel: ObservableObject {
         do {
             try await registerMoodEntryUseCase.execute(with: currentMoodEntry)
             setLoading(to: false)
+            await coordinator.dismiss(animated: true)
         } catch {
             print("Failed to log mood entry: \(error.localizedDescription)")
             setLoading(to: false)

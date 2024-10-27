@@ -86,7 +86,7 @@ public struct MMSliderView: View {
 }
 
 #Preview {
-    var sliderValue: Binding<Double> = .constant(1.0)
+    let sliderValue: Binding<Double> = .constant(1.0)
     MMSliderView(value: sliderValue,
                  sliderRange: 0...4,
                  thumbColor: DesignSystemAsset.primaryColor.swiftUIColor.opacity(1),

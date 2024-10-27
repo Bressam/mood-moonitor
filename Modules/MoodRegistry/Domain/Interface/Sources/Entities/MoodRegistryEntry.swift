@@ -6,14 +6,14 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
-public struct MoodRegistryEntry {
-    public let moodLevel: String
-    public let feelings: [String]
-    public let moodDescription: String
+import Foundation
 
-    public init (moodLevel: String, feelings: [String], moodDescription: String) {
-        self.moodLevel = moodLevel
-        self.feelings = feelings
-        self.moodDescription = moodDescription
+public struct MoodRegistryEntry: Codable {
+    public let date: Date?
+    public let moodEntry: MoodEntry
+
+    public init(date: Date? = Date(), moodEntry: MoodEntry) {
+        self.date = date
+        self.moodEntry = moodEntry
     }
 }
