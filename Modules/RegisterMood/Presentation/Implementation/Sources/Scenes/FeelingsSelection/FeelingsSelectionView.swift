@@ -67,7 +67,8 @@ struct FeelingsSelectionView: View {
                 .font(.appBodyFont)
                 .padding([.top, .leading], SpacingTokens.medium.constant)
             Divider()
-        }
+                .padding([.leading, .trailing])
+        }.foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
     }
 
     private var feelingsListView: some View {
