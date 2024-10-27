@@ -14,6 +14,7 @@ import RegisterMoodDomainInterface
 import MoodRegistryDomainInterface
 
 public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
+    public var delegate: RegisterMoodCoordinatorDelegate?
     public let navigationController: MMNavigationController
     private let registerMoodUseCase: RegisterMoodEntryUseCaseProtocol
     private let retrieveMoodUseCase: RetrieveAvailableMoodsUseCaseProtocol
@@ -54,5 +55,10 @@ public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
                                              currentMoodEntry: moodEntry)
         let moodRegistryVC = UIHostingController(rootView: MoreDetailsView(viewModel: viewModel))
         navigationController.pushViewController(moodRegistryVC, animated: true)
+    }
+    
+    public func finishFlow() {
+        delegate?.didRegisterMood()
+        dismiss(animated: true)
     }
 }

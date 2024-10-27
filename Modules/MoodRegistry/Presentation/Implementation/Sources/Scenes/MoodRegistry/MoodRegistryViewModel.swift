@@ -10,6 +10,10 @@ import Foundation
 import MoodRegistryFeatureInterface
 import MoodRegistryDomainInterface
 
+protocol MoodRegistryRefreshDelegate: AnyObject {
+    func refreshMoodRegistry()
+}
+
 public class MoodRegistryViewModel: ObservableObject {
     private weak var coordinator: MoodRegistryCoordinatorProtocol?
     private let retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol
@@ -45,5 +49,13 @@ public class MoodRegistryViewModel: ObservableObject {
     private func isToday(_ date: Date?) -> Bool {
         guard let date else { return false }
         return Calendar.current.isDateInToday(date)
+    }
+}
+
+extension MoodRegistryViewModel: MoodRegistryRefreshDelegate {
+    func refreshMoodRegistry() {
+        Task {
+            await fetchMoodRegistry()
+        }
     }
 }

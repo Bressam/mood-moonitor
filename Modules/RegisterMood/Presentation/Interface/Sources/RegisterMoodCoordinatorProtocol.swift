@@ -9,8 +9,15 @@ import CoordinatorInterface
 import RegisterMoodDomainInterface
 import MoodRegistryDomainInterface
 
+public protocol RegisterMoodCoordinatorDelegate: AnyObject {
+    func didRegisterMood()
+}
+
 public protocol RegisterMoodCoordinatorProtocol: CoordinatorProtocol {
+    var delegate: RegisterMoodCoordinatorDelegate? { get set }
+
     func navigateToMood()
     func navigateToFeelings(carrying: MoodEntry)
     func navigateToAddDetails(carrying: MoodEntry)
+    func finishFlow()
 }

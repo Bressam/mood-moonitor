@@ -19,6 +19,7 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
     public let navigationController: MMNavigationController
     private let retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol
     private let registerMoodCoordinator: RegisterMoodCoordinatorProtocol
+    private weak var refreshRegistryDelegate: MoodRegistryRefreshDelegate?
 
     public init(navigationController: MMNavigationController = .init(),
                 retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol,
@@ -26,6 +27,7 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
         self.navigationController = navigationController
         self.retrieveMoodRegistryUseCase = retrieveMoodRegistryUseCase
         self.registerMoodCoordinator = registerMoodCoordinator
+        self.registerMoodCoordinator.delegate = self
     }
 
     public func start() {
@@ -36,6 +38,7 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
     public func navigateToMoodRegistry() {
         let viewModel = MoodRegistryViewModel(coordinator: self,
                                               retrieveMoodRegistryUseCase: retrieveMoodRegistryUseCase)
+        refreshRegistryDelegate = viewModel
         let moodRegistryVC = UIHostingController(rootView: MoodRegistryView(moodRegistryViewModel: viewModel))
         navigationController.pushViewController(moodRegistryVC, animated: true)
     }
@@ -43,5 +46,12 @@ public class MoodRegistryMainCoordinator: MoodRegistryCoordinatorProtocol {
     public func navigateToRegisterMood() {
         registerMoodCoordinator.navigationController.modalPresentationStyle = .pageSheet
         startChildFlow(with: registerMoodCoordinator)
+    }
+}
+
+// MARK: - RegisterMoodCoordinatorDelegate
+extension MoodRegistryMainCoordinator: RegisterMoodCoordinatorDelegate {
+    public func didRegisterMood() {
+        refreshRegistryDelegate?.refreshMoodRegistry()
     }
 }

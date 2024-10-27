@@ -12,6 +12,7 @@ import CoordinatorInterface
 import MoodRegistryDomainInterface
 
 public final class RegisterMoodCoordinatorStub: RegisterMoodCoordinatorProtocol {
+    public var delegate: RegisterMoodCoordinatorDelegate? = nil
     public var navigationController: MMNavigationController = .init()
 
     public init() {}
@@ -30,5 +31,9 @@ public final class RegisterMoodCoordinatorStub: RegisterMoodCoordinatorProtocol 
 
     public func navigateToAddDetails(carrying: MoodEntry) {
         print("RegisterMoodCoordinatorStub: navigateToAddDetails")
+    }
+
+    public func finishFlow() {
+        print("RegisterMoodCoordinatorStub: finishFlow")
     }
 }
