@@ -21,12 +21,15 @@ struct FeelingsSelectionView: View {
 
     // MARK: - Views
     var body: some View {
-        VStack {
-            currentMoodView
-            descriptionView
-            feelingsListView
-            MMButton(title: "Continue") {
-                viewModel.handleFinishSelectedFeelings()
+        ZStack {
+            gradientBackground
+            VStack {
+                currentMoodView
+                descriptionView
+                feelingsListView
+                MMButton(title: "Continue") {
+                    viewModel.handleFinishSelectedFeelings()
+                }
             }
         }
         .onAppear(perform: {
@@ -34,6 +37,19 @@ struct FeelingsSelectionView: View {
                 await viewModel.fetchAvailableFeelings()
             }
         })
+    }
+
+    private var gradientBackground: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor.opacity(0.6),
+                              location: 0.14)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .opacity(0.55)
+        .edgesIgnoringSafeArea(.all)
     }
 
     private var currentMoodView: some View {

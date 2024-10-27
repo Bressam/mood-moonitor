@@ -21,9 +21,18 @@ struct MoreDetailsView: View {
 
     // MARK: - Views
     var body: some View {
-        if viewModel.isloading {
-            LoadingIndicatorView(style: .rocket)
-        } else {
+        ZStack {
+            gradientBackground
+            if viewModel.isloading {
+                LoadingIndicatorView(style: .rocket)
+            } else {
+                contentView
+            }
+        }
+    }
+
+    private var contentView: some View {
+        VStack {
             Text("MoreDetailsView")
             MMButton(title: "Send") {
                 Task {
@@ -31,6 +40,19 @@ struct MoreDetailsView: View {
                 }
             }
         }
+    }
+
+    private var gradientBackground: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor.opacity(0.6),
+                              location: 0.14)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .opacity(0.55)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
