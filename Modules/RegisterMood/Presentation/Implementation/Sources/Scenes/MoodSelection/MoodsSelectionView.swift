@@ -67,10 +67,25 @@ struct MoodSliderView: View {
             Text("Current Mood: \(currentMood.name.capitalized)")
                 .font(.title2)
                 .padding()
+            ZStack(alignment: .leading) {
+                // Capsule Background
+                Capsule()
+//                    .fill(Color(red: 142/255, green: 142/255, blue: 142/255))
+                    .fill(DesignSystemAsset.secondaryColor.swiftUIColor.opacity(0.6))
+                    .frame(height: 24)
 
-            Slider(value: sliderValue,
-                   in: 0...Double(moodCases.count - 1),
-                   step: 1)
+                // Progress Fill based on slider value
+                var width = CGFloat(sliderValue.wrappedValue / Double(moodCases.count - 1)) * UIScreen.main.bounds.width * 0.99
+                Capsule()
+                    .fill(DesignSystemAsset.primaryColor.swiftUIColor)
+                    .frame(width: max(0, min(width, UIScreen.main.bounds.width * 0.92)), height: 24)
+
+                // Slider Handle
+                Slider(value: sliderValue,
+                       in: 0...Double(moodCases.count - 1),
+                       step: 1)
+                    .opacity(0.1)
+            }
             .padding()
         }
     }
