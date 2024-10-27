@@ -32,7 +32,7 @@ struct MoodsSelectionView: View {
                 MMButton(title: "Cancel", style: .secondary) {
                     viewModel.dismiss()
                 }
-            }
+            }.padding([.bottom], SpacingTokens.large.constant)
         }
         .onAppear(perform: {
             Task {
