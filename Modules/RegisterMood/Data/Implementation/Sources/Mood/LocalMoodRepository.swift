@@ -16,8 +16,8 @@ public class LocalMoodRepository: MoodRepositoryProtocol {
     public init() {}
 
     public func saveMood(_ mood: MoodRegistryDomainInterface.MoodEntry) async throws {
-        let moodEntryRegistry = MoodRegistryEntry(moodEntry: mood)
-        if let encodedData = try? JSONEncoder().encode(moodEntryRegistry) {
+        let moodRegistryEntry = MoodRegistryEntry(moodEntry: mood)
+        if let encodedData = try? JSONEncoder().encode(moodRegistryEntry) {
             UserDefaults.standard.set(encodedData, forKey: moodEntriesKey)
         }
         return
