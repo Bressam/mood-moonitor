@@ -48,7 +48,10 @@ public struct MoodGradientView: View {
             }
             .overlay(
                 RadialGradient(
-                    gradient: Gradient(colors: [getColor(for: currentMood), .clear]),
+                    gradient: Gradient(colors: [
+                        MoodGradientView.getColor(for: currentMood),
+                        .clear
+                    ]),
                     center: .center,
                     startRadius: 0,
                     endRadius: 180
@@ -57,7 +60,7 @@ public struct MoodGradientView: View {
             )
     }
 
-    private func getColor(for mood: Mood) -> Color {
+    public static func getColor(for mood: Mood) -> Color {
         switch mood {
         case .veryUnpleasant: return .purple
         case .unpleasant: return .cyan
@@ -65,10 +68,6 @@ public struct MoodGradientView: View {
         case .pleasant: return .green.opacity(0.8)
         case .veryPleasant: return .green
         }
-    }
-
-    public func moodColor() -> Color {
-        return getColor(for: currentMood)
     }
 }
 

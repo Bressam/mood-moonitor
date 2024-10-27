@@ -15,7 +15,7 @@ class MoreDetailsViewModel: ObservableObject {
     private let coordinator: RegisterMoodCoordinatorProtocol
     private let registerMoodEntryUseCase: RegisterMoodEntryUseCaseProtocol
     @Published var moodDetailsEntry: String
-    private var currentMoodEntry: MoodEntry
+    private(set) var currentMoodEntry: MoodEntry
 
     @MainActor
     @Published var isloading: Bool = false

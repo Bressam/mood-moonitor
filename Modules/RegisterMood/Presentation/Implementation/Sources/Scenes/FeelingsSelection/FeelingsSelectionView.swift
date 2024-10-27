@@ -42,8 +42,10 @@ struct FeelingsSelectionView: View {
     private var gradientBackground: some View {
         LinearGradient(
             gradient: Gradient(stops: [
+                Gradient.Stop(color: MoodGradientView.getColor(for: viewModel.currentMoodEntry.moodLevel),
+                              location: 0.3),
                 Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor.opacity(0.6),
-                              location: 0.14)
+                              location: 1)
             ]),
             startPoint: .top,
             endPoint: .bottom
