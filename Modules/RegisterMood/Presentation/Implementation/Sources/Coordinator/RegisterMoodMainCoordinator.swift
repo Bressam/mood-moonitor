@@ -48,6 +48,10 @@ public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
     }
 
     public func navigateToAddDetails(carrying moodEntry: MoodEntry) {
-        print("navigateToAddDetails")
+        let viewModel = MoreDetailsViewModel(coordinator: self,
+                                             registerMoodEntryUseCase: registerMoodUseCase,
+                                             currentMoodEntry: moodEntry)
+        let moodRegistryVC = UIHostingController(rootView: MoreDetailsView(viewModel: viewModel))
+        navigationController.pushViewController(moodRegistryVC, animated: true)
     }
 }
