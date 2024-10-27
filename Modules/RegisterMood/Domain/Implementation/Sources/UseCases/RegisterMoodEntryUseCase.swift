@@ -16,6 +16,7 @@ public class RegisterMoodEntryUseCase: RegisterMoodEntryUseCaseProtocol {
     }
 
     public func execute(with moodEntry: MoodEntry) async throws {
+        try await Task.sleep(for: .seconds(2.5))
         return try await repository.saveMood(moodEntry)
     }
 }

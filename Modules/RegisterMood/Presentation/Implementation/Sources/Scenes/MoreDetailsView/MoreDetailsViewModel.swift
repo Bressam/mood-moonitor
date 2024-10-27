@@ -16,6 +16,9 @@ class MoreDetailsViewModel: ObservableObject {
     @Published var moodDetailsEntry: String
     private var currentMoodEntry: MoodEntry
 
+    @MainActor
+    @Published var isloading: Bool = false
+
     init(coordinator: RegisterMoodCoordinatorProtocol,
          registerMoodEntryUseCase: RegisterMoodEntryUseCaseProtocol,
          currentMoodEntry: MoodEntry) {
@@ -26,11 +29,22 @@ class MoreDetailsViewModel: ObservableObject {
     }
 
     func registerMoodEntry() async {
+        setLoading(to: true)
         currentMoodEntry.moodDescription = moodDetailsEntry
         do {
             try await registerMoodEntryUseCase.execute(with: currentMoodEntry)
+            setLoading(to: false)
         } catch {
             print("Failed to log mood entry: \(error.localizedDescription)")
+            setLoading(to: false)
+        }
+    }
+
+    private func setLoading(to isLoading: Bool) {
+        Task {
+            await MainActor.run {
+                isloading = isLoading
+            }
         }
     }
 }

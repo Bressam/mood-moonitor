@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct MoreDetailsView: View {
     // MARK: - Properties
@@ -19,7 +20,18 @@ struct MoreDetailsView: View {
     }
 
     // MARK: - Views
-    var body: some View { Text("MoreDetailsView") }
+    var body: some View {
+        if viewModel.isloading {
+            LoadingIndicatorView(style: .rocket)
+        } else {
+            Text("MoreDetailsView")
+            MMButton(title: "Send") {
+                Task {
+                    await viewModel.registerMoodEntry()
+                }
+            }
+        }
+    }
 }
 
 #Preview {
