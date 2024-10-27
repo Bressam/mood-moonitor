@@ -17,6 +17,6 @@ public class MoodRepository: MoodRepositoryProtocol {
     }
 
     public func getAvailableMoods() async throws -> [RegisterMoodDomainInterface.Mood] {
-        return []
+        return Mood.allCases
     }
 }

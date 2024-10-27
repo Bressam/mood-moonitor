@@ -6,6 +6,16 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
-public struct Mood: Codable {
-    public var name: String
+public enum Mood: Codable, CaseIterable {
+    case veryUnpleasant, unpleasant, neutral, pleasant, veryPleasant
+
+    public var name: String {
+        switch self {
+        case .veryUnpleasant: return "Very Unpleasant"
+        case .unpleasant: return "Unpleasant"
+        case .neutral: return "Neutral"
+        case .pleasant: return "Pleasant"
+        case .veryPleasant: return "Very Pleasant"
+        }
+    }
 }
