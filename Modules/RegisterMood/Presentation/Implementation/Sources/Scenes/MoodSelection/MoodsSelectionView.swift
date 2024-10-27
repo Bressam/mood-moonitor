@@ -46,9 +46,10 @@ struct MoodsSelectionView: View {
 
     private var headerView: some View {
         Text("Choose how you felt today")
+            .frame(minHeight: 90)
             .font(.appLargeTitleFont)
             .multilineTextAlignment(.center)
-            .padding([.top], SpacingTokens.large.constant)
+            .padding([.top], SpacingTokens.small.constant)
     }
 
     private var currentMoodView: some View {
@@ -60,5 +61,7 @@ struct MoodsSelectionView: View {
 }
 
 #Preview {
-    MoodsSelectionView(viewModel: .preview)
+    MoodsSelectionView(viewModel: .preview)        .presentationDetents([.medium, .large])
+        .presentationBackgroundInteraction(.enabled)
+        .presentationDragIndicator(.visible)
 }
