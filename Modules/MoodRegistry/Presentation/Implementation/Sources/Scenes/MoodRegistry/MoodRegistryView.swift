@@ -30,6 +30,11 @@ public struct MoodRegistryView: View {
             Spacer()
         }.padding([.leading, .trailing],
                   SpacingTokens.xxlarge.constant)
+        .onAppear(perform: {
+            Task {
+                await viewModel.fetchMoodRegistry()
+            }
+        })
         .navigationTitle("Welcome :)")
     }
 

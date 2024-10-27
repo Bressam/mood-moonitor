@@ -11,14 +11,27 @@ import MoodRegistryDomainInterface
 import RegisterMoodDomainInterface
 
 public class LocalMoodRepository: MoodRepositoryProtocol {
-    private let moodEntriesKey = "MoodEntriesKey"
+    private let moodEntryKey = "MoodEntryKey"
 
     public init() {}
 
     public func saveMood(_ mood: MoodRegistryDomainInterface.MoodEntry) async throws {
         let moodRegistryEntry = MoodRegistryEntry(moodEntry: mood)
-        if let encodedData = try? JSONEncoder().encode(moodRegistryEntry) {
-            UserDefaults.standard.set(encodedData, forKey: moodEntriesKey)
+
+        var moodRegistryEntries: [MoodRegistryEntry] = []
+        // Read current array
+        if let savedData = UserDefaults.standard.data(forKey: moodEntryKey),
+           let decodedEntry = try? JSONDecoder().decode([MoodRegistryEntry].self, from: savedData) {
+            // Current array exists, keep values
+            moodRegistryEntries = decodedEntry
+        }
+        
+        // Append new entry
+        moodRegistryEntries.append(moodRegistryEntry)
+
+        // Save updated Entries array
+        if let encodedData = try? JSONEncoder().encode(moodRegistryEntries) {
+            UserDefaults.standard.set(encodedData, forKey: moodEntryKey)
         }
         return
     }
