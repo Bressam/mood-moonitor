@@ -32,7 +32,7 @@ public struct MoodSliderView: View {
         VStack(spacing: SpacingTokens.medium.constant) {
             Text("\(currentMood.name.capitalized)")
                 .font(.appTitleFont)
-            
+
             MMSliderView(value: sliderValue,
                          sliderRange: 0...Double(moodCases.count - 1),
                          thumbColor: DesignSystemAsset.secondaryColor.swiftUIColor.opacity(1),

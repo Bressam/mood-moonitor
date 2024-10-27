@@ -17,11 +17,14 @@ public enum MoodViewStyle {
 public struct MoodView: View {
     @Binding var currentMood: Mood
     @State var style: MoodViewStyle
+    @State var hasTitle: Bool
 
     public init(mood: Binding<Mood>,
-                style: MoodViewStyle = .loop) {
+                style: MoodViewStyle = .loop,
+                hasTitle: Bool = true) {
         self._currentMood = mood
         self.style = style
+        self.hasTitle = hasTitle
     }
 
     public var body: some View {
@@ -29,6 +32,7 @@ public struct MoodView: View {
             animation
             Text(currentMood.name)
                 .font(.appTitleFont)
+                .opacity(hasTitle ? 1.0 : 0.0)
         }
     }
 

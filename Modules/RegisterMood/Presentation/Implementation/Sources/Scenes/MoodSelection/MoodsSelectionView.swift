@@ -42,7 +42,9 @@ struct MoodsSelectionView: View {
     }
 
     private var currentMoodView: some View {
-        MoodGradientView(currentMood: $viewModel.selectedMood, hasShadow: false)
+        MoodGradientView(currentMood: $viewModel.selectedMood,
+                         hasShadow: false,
+                         hasMoodName: false)
         .padding([.top], SpacingTokens.large.constant)
     }
 }

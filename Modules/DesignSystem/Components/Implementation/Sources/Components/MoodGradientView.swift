@@ -13,19 +13,22 @@ public struct MoodGradientView: View {
     @Binding var currentMood: Mood
     @State var style: MoodViewStyle
     @State var hasShadow: Bool
+    @State var hasMoodName: Bool
 
     public init(currentMood: Binding<Mood>,
                 style: MoodViewStyle = .loop,
-                hasShadow: Bool = true) {
+                hasShadow: Bool = true,
+                hasMoodName: Bool = true) {
         self._currentMood = currentMood
         self.style = style
         self.hasShadow = hasShadow
+        self.hasMoodName = hasMoodName
     }
 
     public var body: some View {
         ZStack {
             backgroundRender
-            MoodView(mood: $currentMood, style: style)
+            MoodView(mood: $currentMood, style: style, hasTitle: hasMoodName)
         }
     }
 
