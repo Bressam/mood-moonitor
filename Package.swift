@@ -12,7 +12,9 @@ let packageSettings = PackageSettings(
     productTypes: [
         // External libraries are static framework by default.
         // Changing to dynamic framework necessary ones
-        "Lottie": .framework
+        "Lottie": .framework,
+        "FirebaseAuth": .staticLibrary,
+        "FirebaseFirestore": .staticLibrary
     ],
     projectOptions: [
         // Tuist can generate resources synthetizers for each external and internal library if necessary
@@ -32,13 +34,18 @@ let package = Package(
                     targets: ["MoodMoonitor"])
     ],
     dependencies: [
-        .package(url: "https://github.com/airbnb/lottie-ios", exact: "4.5.0")
+        .package(url: "https://github.com/airbnb/lottie-ios",
+                 exact: "4.5.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk",
+                 .upToNextMajor(from: "11.4.0"))
     ],
     targets: [
         .target(
             name: "MoodMoonitor",
             dependencies: [
-                .product(name: "Lottie", package: "lottie-ios")
+                .product(name: "Lottie", package: "lottie-ios"),
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
             ],
             path: "Sources"
         )

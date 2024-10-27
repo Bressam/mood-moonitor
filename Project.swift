@@ -22,7 +22,9 @@ let project = Project.project(
         .project(target: "RegisterMoodFeature",
                  path: "./Modules/RegisterMood/Presentation"),
         .project(target: "RegisterMoodFeatureInterface",
-                 path: "./Modules/RegisterMood/Presentation")
+                 path: "./Modules/RegisterMood/Presentation"),
+        .external(name: "FirebaseAuth"),
+        .external(name: "FirebaseAuth")
     ],
     disableBundleAccessors: false,
     disableSynthesizedResourceAccessors: false
