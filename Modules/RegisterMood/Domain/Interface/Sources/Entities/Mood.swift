@@ -6,7 +6,8 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
-public enum Mood: Codable, CaseIterable {
+public enum Mood: Codable, CaseIterable, Identifiable {
+    public var id: Self { self }
     case veryUnpleasant, unpleasant, neutral, pleasant, veryPleasant
 
     public var name: String {

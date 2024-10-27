@@ -31,20 +31,20 @@ public struct MoodGradientView: View {
 
     var backgroundRender: some View {
         RoundedRectangle(cornerRadius: RadiusTokens.large.constant)
-            .fill(Color.white) // Base color of the rectangle
+            .fill(Color.white)
+            .frame(width: 340, height: 340)
+            .if(hasShadow) { view in
+                view.shadow(radius: RadiusTokens.large.constant)
+            }
             .overlay(
                 RadialGradient(
                     gradient: Gradient(colors: [getColor(for: currentMood), .clear]),
                     center: .center,
                     startRadius: 0,
-                    endRadius: 180 // Adjust for gradient spread
+                    endRadius: 180
                 )
                 .clipShape(RoundedRectangle(cornerRadius: RadiusTokens.large.constant))
             )
-            .frame(width: 340, height: 340) // Set your preferred frame size
-            .if(hasShadow) { view in
-                view.shadow(radius: RadiusTokens.large.constant)
-            }
     }
 
     private func getColor(for mood: Mood) -> Color {
