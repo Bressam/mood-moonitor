@@ -24,37 +24,83 @@ public struct MoodRegistryView: View {
 
     // MARK: - Views
     public var body: some View {
-        VStack(spacing: SpacingTokens.xxlarge.constant) {
-            todayEntry
-            moodRegistryList
-            Spacer()
-        }.padding([.leading, .trailing],
-                  SpacingTokens.xxlarge.constant)
-        .navigationTitle("Welcome :)")
+        ZStack {
+            gradientBackground
+            VStack(spacing: SpacingTokens.xxlarge.constant) {
+                todayEntrySectionView
+                moodRegistryList
+                Spacer()
+            }.padding([.leading, .trailing],
+                      SpacingTokens.xxlarge.constant)
+            .onAppear(perform: {
+                Task {
+                    await viewModel.fetchMoodRegistry()
+                }
+            })
+        }
+        .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Text("Welcome :)")
+                        .foregroundColor(DesignSystemAsset.primaryColor.swiftUIColor)
+                        .font(.appLargeTitleFont)
+                        .padding([.top], SpacingTokens.xxlarge.constant)
+                        .padding([.leading], SpacingTokens.large.constant)
+                    Spacer()
+                }.padding([.top], SpacingTokens.xxlarge.constant)
+            }
+        }
     }
 
-    let items = Array(1...10).map { "Item \($0)" }
+    private var gradientBackground: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightPink.swiftUIColor.opacity(0.6),
+                              location: 0.24),
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor.opacity(0.6),
+                              location: 0.76)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .opacity(0.55)
+        .edgesIgnoringSafeArea(.all)
+    }
+
     private var moodRegistryList: some View {
         VStack {
             HStack {
                 Text("Registry")
                     .font(.appTitleFont)
+                    .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                 Spacer()
             }
-            List(items, id: \.self) { item in
-                Text(item)
+            List(viewModel.moodRegistry, id: \.date) { moodRegistryEntry in
+                HStack {
+                    Text(moodRegistryEntry.moodEntry.moodLevel.name)
+                    Spacer()
+                    Text(dateFormatter.string(from: moodRegistryEntry.date!))
+                }
+                .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                .listRowBackground(Color.clear)
             }
-            .listStyle(PlainListStyle())
-            .background(Color.clear)
-
+            .listStyle(.plain)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: RadiusTokens.regular.constant)
+                    .fill(DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+                    .shadow(radius: RadiusTokens.regular.constant)
+            )
         }
     }
 
-    private var todayEntry: some View {
+    private var todayEntrySectionView: some View {
         VStack(spacing: SpacingTokens.medium.constant) {
             HStack {
                 Text("Today, \(dateFormatter.string(from: .init()))")
                     .font(.appTitleFont)
+                    .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
                 Spacer()
                 Button(action: {
                     viewModel.handleAddMoodEntry()
@@ -62,16 +108,34 @@ public struct MoodRegistryView: View {
                     Image(systemName: "plus")
                     Text("Log")
                 })
+                .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
+                .tint(DesignSystemAsset.primaryColor.swiftUIColor)
                 .buttonStyle(.bordered)
             }
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.gray.opacity(0.5))
-                    .frame(height: 360)
-                Text("Your mood here")
-            }
+            todayEntryMoodView
         }
         .padding([.top], SpacingTokens.large.constant)
+    }
+
+    private var todayEntryMoodView: some View {
+        ZStack(alignment: .center) {
+            if let todayEntry = viewModel.todayMoodRegistry {
+                MoodGradientView(currentMood: .constant(todayEntry.moodEntry.moodLevel),
+                                 style: .playOnce,
+                                 hasShadow: true,
+                                 fillColor: DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+                .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+            } else {
+                RoundedRectangle(cornerRadius: RadiusTokens.regular.constant)
+                    .fill(DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+                    .frame(height: 340)
+                    .shadow(radius: RadiusTokens.large.constant)
+                Text("No mood entry for today. Log one when you feel it.")
+                    .font(.appTitleFont)
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                    .padding([.leading, .trailing], SpacingTokens.large.constant)
+            }
+        }
     }
 }
 

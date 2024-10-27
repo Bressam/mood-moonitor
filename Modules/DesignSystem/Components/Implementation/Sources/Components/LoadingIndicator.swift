@@ -9,10 +9,24 @@
 import SwiftUI
 import Lottie
 
-public struct LoadingIndicatorView: View {
-    private let loadingURL = Files.Modules.DesignSystem.Components.Implementation.Resources.loadingAstronautJson.url
+public enum LoadingIndicatorStyle {
+    case astronaut, rocket
 
-    public init() {}
+    var animationURL: URL {
+        let basePath = Files.Modules.DesignSystem.Components.Implementation.Resources.self
+        switch self {
+        case .astronaut: return basePath.loadingAstronautJson.url
+        case .rocket: return basePath.loadingTakeoffJson.url
+        }
+    }
+}
+
+public struct LoadingIndicatorView: View {
+    @State var style: LoadingIndicatorStyle
+
+    public init(style: LoadingIndicatorStyle = .astronaut) {
+        self.style = style
+    }
 
     public var body: some View {
         VStack(spacing: SpacingTokens.xsmall.constant) {
@@ -25,7 +39,7 @@ public struct LoadingIndicatorView: View {
 
     private var animation: some View {
         LottieView({
-            await LottieAnimation.loadedFrom(url: loadingURL)
+            await LottieAnimation.loadedFrom(url: style.animationURL)
         }, placeholder: {
             ProgressView()
                 .frame(width: 120, height: 120)
@@ -38,4 +52,5 @@ public struct LoadingIndicatorView: View {
 
 #Preview {
     LoadingIndicatorView()
+    LoadingIndicatorView(style: .rocket)
 }

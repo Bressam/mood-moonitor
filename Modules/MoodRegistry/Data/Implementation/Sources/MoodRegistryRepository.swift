@@ -26,4 +26,13 @@ public class MoodRegistryRepository: MoodRegistryRepositoryProtocol {
             return try await localMoodRegistryRepository.getMoodRegistry()
         }
     }
+
+    public func getTodayMoodRegistry() async throws -> MoodRegistryDomainInterface.MoodRegistryEntry? {
+        do {
+            return try await remoteMoodRegistryRepository.getTodayMoodRegistry()
+        } catch {
+            // Fallback to local data
+            return try await localMoodRegistryRepository.getTodayMoodRegistry()
+        }
+    }
 }

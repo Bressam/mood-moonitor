@@ -13,9 +13,11 @@ import MoodRegistryDomainInterface
 public class MoodRegistryViewModel: ObservableObject {
     private weak var coordinator: MoodRegistryCoordinatorProtocol?
     private let retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol
+    @MainActor
+    @Published var moodRegistry: [MoodRegistryEntry] = []
 
     @MainActor
-    @Published var isloading: Bool = false
+    @Published var todayMoodRegistry: MoodRegistryEntry?
 
     public init(coordinator: MoodRegistryCoordinatorProtocol,
                 retrieveMoodRegistryUseCase: RetrieveMoodRegistryUseCaseProtocol) {
@@ -25,5 +27,23 @@ public class MoodRegistryViewModel: ObservableObject {
 
     public func handleAddMoodEntry() {
         coordinator?.navigateToRegisterMood()
+    }
+
+    func fetchMoodRegistry() async {
+        let moodRegistryFetch = try? await retrieveMoodRegistryUseCase.execute()
+        await MainActor.run {
+            var moodList = moodRegistryFetch
+            let todayMood = moodRegistryFetch?.last(where: { isToday($0.date) })
+            if let todayMoodIndex = moodRegistryFetch?.firstIndex(where: { isToday($0.date) }) {
+                moodList?.remove(at: todayMoodIndex)
+            }
+            todayMoodRegistry = todayMood
+            moodRegistry = moodList ?? []
+        }
+    }
+
+    private func isToday(_ date: Date?) -> Bool {
+        guard let date else { return false }
+        return Calendar.current.isDateInToday(date)
     }
 }

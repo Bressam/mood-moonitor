@@ -9,9 +9,13 @@ let project = Project.module(
         .project(target: "MoodRegistryDomain", path: "../Domain"),
         .project(target: "MoodRegistryData", path: "../Data"),
         .project(target: "DesignSystem",
-                 path: "../../../Modules/DesignSystem/Components")
+                 path: "../../../Modules/DesignSystem/Components"),
+        .project(target: "RegisterMoodFeatureInterface",
+                 path: "../../../Modules/RegisterMood/Presentation")
     ],
     interfaceDependencies: [
+        .project(target: "CoordinatorInterface",
+                 path: "../../../Modules/CoordinatorModule/Coordinator"),
         .project(target: "MoodRegistryDomainInterface", path: "../Domain"),
         .project(target: "MoodRegistryDataInterface", path: "../Data")
     ],
