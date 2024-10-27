@@ -22,6 +22,7 @@ struct MoodsSelectionView: View {
     // MARK: - Views
     var body: some View {
         VStack(spacing: SpacingTokens.small.constant) {
+            headerView
             currentMoodView
             MoodSliderView(currentMood: $viewModel.selectedMood)
             Spacer()
@@ -32,13 +33,22 @@ struct MoodsSelectionView: View {
                 MMButton(title: "Cancel", style: .secondary) {
                     viewModel.dismiss()
                 }
-            }.padding([.bottom], SpacingTokens.large.constant)
+            }
         }
+        .padding([.leading, .trailing], SpacingTokens.medium.constant)
+        .padding([.bottom], SpacingTokens.large.constant)
         .onAppear(perform: {
             Task {
                 await viewModel.fetchAvailableFeelings()
             }
         })
+    }
+
+    private var headerView: some View {
+        Text("Choose how you felt today")
+            .font(.appLargeTitleFont)
+            .multilineTextAlignment(.center)
+            .padding([.top], SpacingTokens.large.constant)
     }
 
     private var currentMoodView: some View {
