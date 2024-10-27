@@ -12,7 +12,7 @@ import DesignSystem
 struct MoodsSelectionView: View {
     // MARK: - Properties
     @ObservedObject
-    var viewModel: MoodsSelectionViewModel
+    private var viewModel: MoodsSelectionViewModel
 
     // MARK: Init
     public init(viewModel: MoodsSelectionViewModel) {
