@@ -10,11 +10,18 @@ import SwiftUI
 import Lottie
 import RegisterMoodDomainInterface
 
+public enum MoodViewStyle {
+    case loop, playOnce
+}
+
 public struct MoodView: View {
     @State var currentMood: Mood
+    @State var style: MoodViewStyle
 
-    public init(mood: Mood) {
+    public init(mood: Mood,
+                style: MoodViewStyle = .loop) {
         self.currentMood = mood
+        self.style = style
     }
 
     public var body: some View {
@@ -34,7 +41,10 @@ public struct MoodView: View {
                 .frame(width: 120, height: 120)
         })
         .animationSpeed(1.2)
-        .looping()
+        .playing(loopMode: .playOnce)
+        .if(style == .loop, transform: { lottieView in
+            lottieView.looping()
+        })
         .scaleEffect(getScaleEffect(for: currentMood))
         .frame(width: 220, height: 220)
     }
