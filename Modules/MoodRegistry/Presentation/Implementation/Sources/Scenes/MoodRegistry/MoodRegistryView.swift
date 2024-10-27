@@ -24,18 +24,37 @@ public struct MoodRegistryView: View {
 
     // MARK: - Views
     public var body: some View {
-        VStack(spacing: SpacingTokens.xxlarge.constant) {
-            todayEntrySectionView
-            moodRegistryList
-            Spacer()
-        }.padding([.leading, .trailing],
-                  SpacingTokens.xxlarge.constant)
-        .onAppear(perform: {
-            Task {
-                await viewModel.fetchMoodRegistry()
-            }
-        })
+        ZStack {
+            gradientBackground
+            VStack(spacing: SpacingTokens.xxlarge.constant) {
+                todayEntrySectionView
+                moodRegistryList
+                Spacer()
+            }.padding([.leading, .trailing],
+                      SpacingTokens.xxlarge.constant)
+            .onAppear(perform: {
+                Task {
+                    await viewModel.fetchMoodRegistry()
+                }
+            })
+        }
         .navigationTitle("Welcome :)")
+        .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+    }
+
+    private var gradientBackground: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightPink.swiftUIColor.opacity(0.6),
+                              location: 0.24),
+                Gradient.Stop(color: DesignSystemAsset.backgroundLightBlue.swiftUIColor,
+                              location: 0.76)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .opacity(0.55)
+        .edgesIgnoringSafeArea(.all)
     }
 
     private var moodRegistryList: some View {
@@ -46,11 +65,21 @@ public struct MoodRegistryView: View {
                 Spacer()
             }
             List(viewModel.moodRegistry, id: \.date) { moodRegistryEntry in
-                Text(moodRegistryEntry.moodEntry.moodLevel.name)
+                HStack {
+                    Text(moodRegistryEntry.moodEntry.moodLevel.name)
+                    Spacer()
+                    Text(dateFormatter.string(from: moodRegistryEntry.date!))
+                }
+                .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                .listRowBackground(Color.clear)
             }
-            .listStyle(PlainListStyle())
-            .background(Color.clear)
-
+            .listStyle(.plain)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: RadiusTokens.regular.constant)
+                    .fill(DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+                    .shadow(radius: RadiusTokens.regular.constant)
+            )
         }
     }
 
@@ -66,6 +95,8 @@ public struct MoodRegistryView: View {
                     Image(systemName: "plus")
                     Text("Log")
                 })
+                .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
+                .tint(DesignSystemAsset.secondaryActionColor.swiftUIColor)
                 .buttonStyle(.bordered)
             }
             todayEntryMoodView
@@ -87,7 +118,7 @@ public struct MoodRegistryView: View {
                     .shadow(radius: RadiusTokens.large.constant)
                 Text("No mood entry for today. Log one when you feel it.")
                     .font(.appTitleFont)
-                    .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
+                    .foregroundStyle(DesignSystemAsset.secondaryColor.swiftUIColor)
                     .padding([.leading, .trailing], SpacingTokens.large.constant)
             }
         }
