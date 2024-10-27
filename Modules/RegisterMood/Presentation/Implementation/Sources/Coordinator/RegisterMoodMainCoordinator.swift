@@ -59,6 +59,10 @@ public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
     
     public func finishFlow() {
         delegate?.didRegisterMood()
-        dismiss(animated: true)
+        Task {
+            await MainActor.run {
+                dismiss(animated: true)
+            }
+        }
     }
 }
