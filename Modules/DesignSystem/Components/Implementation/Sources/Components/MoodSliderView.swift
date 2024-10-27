@@ -12,32 +12,29 @@ import RegisterMoodDomainInterface
 public struct MoodSliderView: View {
     private let moodCases: [Mood] = Mood.allCases
     @Binding var currentMood: Mood
-
-    private var sliderValue: Binding<Double> {
-        Binding(
-            get: {
-                Double(moodCases.firstIndex(of: currentMood) ?? 0)
-            },
-            set: { newValue in
-                currentMood = moodCases[min(max(Int(newValue.rounded()), 0), moodCases.count - 1)]
-            }
-        )
-    }
+    @State private var sliderPosition: Double = 0
 
     public init(currentMood: Binding<Mood>) {
         self._currentMood = currentMood
+        self._sliderPosition = State(initialValue: Double(Mood.allCases.firstIndex(of: currentMood.wrappedValue) ?? 0))
     }
 
     public var body: some View {
-        VStack(spacing: SpacingTokens.medium.constant) {
+        VStack(spacing: 20) {
             Text("\(currentMood.name.capitalized)")
-                .font(.appTitleFont)
+                .font(.title)
 
-            MMSliderView(value: sliderValue,
+            MMSliderView(value: $sliderPosition,
                          sliderRange: 0...Double(moodCases.count - 1),
                          thumbColor: DesignSystemAsset.secondaryColor.swiftUIColor.opacity(1),
-                         minTrackColor: DesignSystemAsset.secondaryColor.swiftUIColor.opacity(1),
+                         minTrackColor: .clear,
                          maxTrackColor: DesignSystemAsset.secondaryColor.swiftUIColor.opacity(0.3))
+            .onChange(of: sliderPosition, { _, newValue in
+                let newIndex = Int(newValue.rounded())
+                if moodCases.indices.contains(newIndex), moodCases[newIndex] != currentMood {
+                    currentMood = moodCases[newIndex]
+                }
+            })
             .frame(height: 30)
         }
         .padding()
