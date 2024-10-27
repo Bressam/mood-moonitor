@@ -9,6 +9,7 @@
 import Foundation
 import RegisterMoodFeatureInterface
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 class MoreDetailsViewModel: ObservableObject {
     private let coordinator: RegisterMoodCoordinatorProtocol

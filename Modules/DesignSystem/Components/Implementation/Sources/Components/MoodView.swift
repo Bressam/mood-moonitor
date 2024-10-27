@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Lottie
-import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public enum MoodViewStyle {
     case loop, playOnce

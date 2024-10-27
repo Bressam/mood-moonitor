@@ -11,6 +11,7 @@ import SwiftUI
 import CoordinatorInterface
 import RegisterMoodFeatureInterface
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public class RegisterMoodMainCoordinator: RegisterMoodCoordinatorProtocol {
     public let navigationController: MMNavigationController

@@ -7,6 +7,7 @@
 //
 
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public class RetrieveAvailableMoodsUseCase: RetrieveAvailableMoodsUseCaseProtocol {
     private let repository: MoodRepositoryProtocol

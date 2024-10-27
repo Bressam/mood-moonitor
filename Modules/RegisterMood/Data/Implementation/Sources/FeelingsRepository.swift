@@ -7,6 +7,7 @@
 //
 
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public class FeelingsRepository: FeelingsRepositoryProtocol {
     public init() {}

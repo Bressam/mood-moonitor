@@ -7,6 +7,7 @@
 //
 
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public class RetrieveAvailableFeelingsUseCase: RetrieveAvailableFeelingsUseCaseProtocol {
     private let repository: FeelingsRepositoryProtocol

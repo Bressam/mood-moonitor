@@ -6,6 +6,8 @@
 //  Copyright © 2024 dev.bressam. All rights reserved.
 //
 
+import MoodRegistryDomainInterface
+
 public protocol RetrieveAvailableMoodsUseCaseProtocol: AnyObject {
     func execute() async throws -> [Mood]
 }

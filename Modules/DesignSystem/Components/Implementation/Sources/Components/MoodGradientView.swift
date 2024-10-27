@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public struct MoodGradientView: View {
     @Binding var currentMood: Mood

@@ -7,6 +7,7 @@
 //
 import CoordinatorInterface
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public protocol RegisterMoodCoordinatorProtocol: CoordinatorProtocol {
     func navigateToMood()

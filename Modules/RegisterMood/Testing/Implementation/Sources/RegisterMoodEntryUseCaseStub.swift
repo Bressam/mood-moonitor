@@ -8,6 +8,7 @@
 
 import RegisterMoodFeatureInterface
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public final class RegisterMoodEntryUseCaseStub: RegisterMoodEntryUseCaseProtocol {
     var shouldThrowError: Bool

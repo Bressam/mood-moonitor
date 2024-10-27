@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public struct MoodSliderView: View {
     private let moodCases: [Mood] = Mood.allCases

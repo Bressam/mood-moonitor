@@ -10,6 +10,7 @@ import SwiftUI
 import Foundation
 import RegisterMoodFeatureInterface
 import RegisterMoodDomainInterface
+import MoodRegistryDomainInterface
 
 public class MoodsSelectionViewModel: ObservableObject {
     // MARK: - Properties

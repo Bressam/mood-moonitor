@@ -9,6 +9,7 @@
 import RegisterMoodFeatureInterface
 import RegisterMoodDomainInterface
 import CoordinatorInterface
+import MoodRegistryDomainInterface
 
 public final class RegisterMoodCoordinatorStub: RegisterMoodCoordinatorProtocol {
     public var navigationController: MMNavigationController = .init()
