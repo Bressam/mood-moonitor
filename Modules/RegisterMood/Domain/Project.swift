@@ -4,7 +4,9 @@ import ProjectDescriptionHelpers
 let project = Project.module(
     name: "RegisterMoodDomain",
     bundleIdPrefix: "dev.bressam.mood-moonitor",
-    implementationDependencies: [],
+    implementationDependencies: [
+        .project(target: "MoodRegistryDomainInterface", path: "../../../Modules/MoodRegistry/Domain")
+    ],
     interfaceDependencies: [
         .project(target: "MoodRegistryDomainInterface", path: "../../../Modules/MoodRegistry/Domain")
     ],

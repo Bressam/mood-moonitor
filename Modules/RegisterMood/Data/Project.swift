@@ -8,7 +8,8 @@ let project = Project.module(
         .project(target: "RegisterMoodDomain", path: "../Domain")
     ],
     interfaceDependencies: [
-        .project(target: "RegisterMoodDomainInterface", path: "../Domain")
+        .project(target: "RegisterMoodDomainInterface", path: "../Domain"),
+        .project(target: "MoodRegistryDomainInterface", path: "../../../Modules/MoodRegistry/Domain")
     ],
     testDependencies: [
         .project(target: "RegisterMoodTesting", path: "../Testing")

@@ -9,7 +9,8 @@ let project = Project.module(
     implementationDependencies: [
         .project(target: "RegisterMoodFeatureInterface", path: "../Presentation"),
         .project(target: "RegisterMoodDataInterface", path: "../Data"),
-        .project(target: "RegisterMoodDomainInterface", path: "../Domain")
+        .project(target: "RegisterMoodDomainInterface", path: "../Domain"),
+        .project(target: "MoodRegistryDomainInterface", path: "../../../Modules/MoodRegistry/Domain")
     ],
     disableBundleAccessors: true,
     disableSynthesizedResourceAccessors: false

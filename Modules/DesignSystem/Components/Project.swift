@@ -6,6 +6,7 @@ let project = Project.module(
     hasInterface: false,
     bundleIdPrefix: "dev.bressam.mood-moonitor",
     implementationDependencies: [
+        .project(target: "MoodRegistryDomainInterface", path: "../../../Modules/MoodRegistry/Domain"),
         .external(name: "Lottie")
     ],
     interfaceDependencies: [],
