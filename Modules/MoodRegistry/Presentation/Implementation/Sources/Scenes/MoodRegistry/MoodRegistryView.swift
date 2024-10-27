@@ -25,7 +25,7 @@ public struct MoodRegistryView: View {
     // MARK: - Views
     public var body: some View {
         VStack(spacing: SpacingTokens.xxlarge.constant) {
-            todayEntry
+            todayEntrySectionView
             moodRegistryList
             Spacer()
         }.padding([.leading, .trailing],
@@ -38,7 +38,6 @@ public struct MoodRegistryView: View {
         .navigationTitle("Welcome :)")
     }
 
-    let items = Array(1...10).map { "Item \($0)" }
     private var moodRegistryList: some View {
         VStack {
             HStack {
@@ -46,8 +45,8 @@ public struct MoodRegistryView: View {
                     .font(.appTitleFont)
                 Spacer()
             }
-            List(items, id: \.self) { item in
-                Text(item)
+            List(viewModel.moodRegistry, id: \.date) { moodRegistryEntry in
+                Text(moodRegistryEntry.moodEntry.moodLevel.name)
             }
             .listStyle(PlainListStyle())
             .background(Color.clear)
@@ -55,7 +54,7 @@ public struct MoodRegistryView: View {
         }
     }
 
-    private var todayEntry: some View {
+    private var todayEntrySectionView: some View {
         VStack(spacing: SpacingTokens.medium.constant) {
             HStack {
                 Text("Today, \(dateFormatter.string(from: .init()))")
@@ -69,14 +68,29 @@ public struct MoodRegistryView: View {
                 })
                 .buttonStyle(.bordered)
             }
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.gray.opacity(0.5))
-                    .frame(height: 360)
-                Text("Your mood here")
-            }
+            todayEntryMoodView
         }
         .padding([.top], SpacingTokens.large.constant)
+    }
+
+    private var todayEntryMoodView: some View {
+        ZStack(alignment: .center) {
+            if let todayEntry = viewModel.todayMoodRegistry {
+                MoodGradientView(currentMood: .constant(todayEntry.moodEntry.moodLevel),
+                                 style: .playOnce,
+                                 hasShadow: true,
+                                 fillColor: DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+            } else {
+                RoundedRectangle(cornerRadius: RadiusTokens.regular.constant)
+                    .fill(DesignSystemAsset.secondaryActionColor.swiftUIColor.opacity(0.2))
+                    .frame(height: 340)
+                    .shadow(radius: RadiusTokens.large.constant)
+                Text("No mood entry for today. Log one when you feel it.")
+                    .font(.appTitleFont)
+                    .foregroundStyle(DesignSystemAsset.primaryColor.swiftUIColor)
+                    .padding([.leading, .trailing], SpacingTokens.large.constant)
+            }
+        }
     }
 }
 

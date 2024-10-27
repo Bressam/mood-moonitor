@@ -33,7 +33,7 @@ public class MoodRegistryViewModel: ObservableObject {
         let moodRegistryFetch = try? await retrieveMoodRegistryUseCase.execute()
         await MainActor.run {
             var moodList = moodRegistryFetch
-            let todayMood = moodRegistryFetch?.first(where: { isToday($0.date) })
+            let todayMood = moodRegistryFetch?.last(where: { isToday($0.date) })
             if let todayMoodIndex = moodRegistryFetch?.firstIndex(where: { isToday($0.date) }) {
                 moodList?.remove(at: todayMoodIndex)
             }

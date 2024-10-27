@@ -25,7 +25,7 @@ public class LocalMoodRepository: MoodRepositoryProtocol {
             // Current array exists, keep values
             moodRegistryEntries = decodedEntry
         }
-        
+
         // Append new entry
         moodRegistryEntries.append(moodRegistryEntry)
 
